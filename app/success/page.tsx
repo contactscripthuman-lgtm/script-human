@@ -35,16 +35,37 @@ function SuccessContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const priceId = searchParams.get('price_id') || '';
+    const sessionId = searchParams.get('session_id') || '';
     const [countdown, setCountdown] = useState(5);
     const [syncing, setSyncing] = useState(true);
 
     const destination = PLAN_REDIRECT_MAP[priceId] || DEFAULT_DESTINATION;
 
-    // Step 1: Brief 2s syncing phase
+    // Step 1: Sync session with backend to unlock features immediately
     useEffect(() => {
-        const t = setTimeout(() => setSyncing(false), 2000);
-        return () => clearTimeout(t);
-    }, []);
+        let isMounted = true;
+        const syncSession = async () => {
+            if (sessionId) {
+                try {
+                    await fetch('/api/stripe/sync', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ sessionId }),
+                    });
+                } catch (err) {
+                    console.error('Failed to sync session on success page:', err);
+                }
+            }
+            // Add a small delay for Firestore to propagate
+            setTimeout(() => {
+                if (isMounted) setSyncing(false);
+            }, 1000);
+        };
+
+        syncSession();
+
+        return () => { isMounted = false; };
+    }, [sessionId]);
 
     // Step 2: Start 5s countdown after syncing completes
     useEffect(() => {
