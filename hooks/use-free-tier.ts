@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { USAGE_LIMITS, UserTier } from '@/lib/usage-limits';
 import { useAuth } from '@/components/AuthProvider';
 import { db } from '@/lib/firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 
 type FeatureType = 'writing-room' | 'style-studio-audit' | 'style-studio-injector' | 'brand-guardrails' | 'copy-action';
 
@@ -24,36 +24,34 @@ export function useFreeTier() {
             return;
         }
 
-        const fetchTier = async () => {
-            try {
-                // Background sync with Stripe to enforce truth
-                fetch('/api/stripe/sync', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ uid: user.uid }),
-                }).catch(err => console.error("Background sync failed:", err));
+        // Background sync with Stripe to enforce truth
+        fetch('/api/stripe/sync', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ uid: user.uid }),
+        }).catch(err => console.error("Background sync failed:", err));
 
-                const subRef = doc(db, 'users', user.uid, 'subscription', 'current');
-                const subSnap = await getDoc(subRef);
-
-                if (subSnap.exists()) {
-                    const data = subSnap.data();
-                    const tier = data.planType?.toLowerCase();
-                    if (Object.values(UserTier).includes(tier as UserTier)) {
-                        setCurrentTier(tier as UserTier);
-                    }
+        const subRef = doc(db, 'users', user.uid, 'subscription', 'current');
+        const unsubscribe = onSnapshot(subRef, (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                const tier = data.planType?.toLowerCase();
+                if (Object.values(UserTier).includes(tier as UserTier)) {
+                    setCurrentTier(tier as UserTier);
                 }
-            } catch (e: any) {
-                if (e?.code === 'unavailable' || e?.message?.includes('offline')) {
-                    console.warn("Firestore is offline, falling back to cached or default tier");
-                } else {
-                    console.error("Failed to fetch user tier:", e);
-                }
+            } else {
                 setCurrentTier(UserTier.FREE);
             }
-        };
+        }, (error: any) => {
+            if (error?.code === 'unavailable' || error?.message?.includes('offline')) {
+                console.warn("Firestore is offline, falling back to cached or default tier");
+            } else {
+                console.error("Failed to fetch user tier:", error);
+            }
+            setCurrentTier(UserTier.FREE);
+        });
 
-        fetchTier();
+        return () => unsubscribe();
     }, [user, authLoading]);
 
     // Load usage from localStorage on mount

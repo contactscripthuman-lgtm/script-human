@@ -17,7 +17,7 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const { user } = useAuth();
-    const { hasProAccess } = useFreeTier();
+    const { currentTier, hasProAccess } = useFreeTier();
     const pathname = usePathname();
 
     // Close profile menu when route changes
@@ -155,7 +155,7 @@ export default function Navbar() {
                                     </div>
                                     <div className="overflow-hidden">
                                         <p className="text-sm font-bold text-gray-900 truncate">{user.email}</p>
-                                        <p className="text-xs text-gray-500">Free Plan</p>
+                                        <p className="text-xs text-gray-500 capitalize">{currentTier} Plan</p>
                                     </div>
                                 </div>
                             </div>
