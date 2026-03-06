@@ -1,0 +1,11 @@
+Checking for new versions...
+
+Getting ready...
+
+time="Wed, 04 Mar 2026 14:52:29 +04" level=fatal msg="Error while authenticating with Stripe: Authorization failed, status=400, body={
+  "error": {
+    "message": "Invalid user agent. This endpoint can only be used by the Stripe CLI tool.",
+    "type": "invalid_request_error"
+  }
+}
+"

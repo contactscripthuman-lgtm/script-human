@@ -1,0 +1,24 @@
+
+> scripthuman@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+
+ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 2.3s
+  Running TypeScript ...
+  Collecting page data using 23 workers ...
+ΓÜá Using edge runtime on a page currently disables static generation for that page
+  Generating static pages using 23 workers (0/41) ...
+  Generating static pages using 23 workers (10/41) 
+Error occurred prerendering page "/". Read more: https://nextjs.org/docs/messages/prerender-error
+Error: Attempted to call createMotionComponent() from the server but createMotionComponent is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
+    at <unknown> (D:\Script Human Web Tool\.next\server\chunks\ssr\_85b848eb._.js:1:9246)
+    at Object.get (D:\Script Human Web Tool\.next\server\chunks\ssr\_85b848eb._.js:1:113273)
+    at fn (D:\Script Human Web Tool\.next\server\chunks\ssr\_85b848eb._.js:1:122618) {
+  digest: '489151887'
+}
+Export encountered an error on /page: /, exiting the build.
+Γ¿» Next.js build worker exited with code: 1 and signal: null

@@ -1,0 +1,326 @@
+
+> scripthuman@0.1.0 lint
+> eslint
+
+
+D:\Script Human Web Tool\app\actions\humanize.ts
+   5:7  warning  'anthropic' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  11:7  warning  'MOOD_PROMPTS' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\api\enterprise\sanitize\route.ts
+  53:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\api\humanize-iterative\route.ts
+    3:10  warning  'analyzeBurstiness' is defined but never used         @typescript-eslint/no-unused-vars
+    3:29  warning  'applyMultipleSuggestions' is defined but never used  @typescript-eslint/no-unused-vars
+  193:9   error    'processed' is never reassigned. Use 'const' instead  prefer-const
+  313:9   error    'subject' is never reassigned. Use 'const' instead    prefer-const
+
+D:\Script Human Web Tool\app\api\keys\route.ts
+  9:27  warning  'req' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\api\trust-hub\analyze-media\route.ts
+  2:10  warning  'AIMediaDetector' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\api\trust-hub\certify\route.ts
+  6:5  warning  'generateCertificatePDF' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\blog\[slug]\page.tsx
+   4:8    warning  'Footer' is defined but never used        @typescript-eslint/no-unused-vars
+  75:36   warning  'node' is defined but never used          @typescript-eslint/no-unused-vars
+  75:102  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Script Human Web Tool\app\blog\page.tsx
+  3:39  warning  'Tag' is defined but never used     @typescript-eslint/no-unused-vars
+  6:8   warning  'Footer' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\contact\page.tsx
+  3:10  warning  'Mail' is defined but never used    @typescript-eslint/no-unused-vars
+  3:31  warning  'MapPin' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\dashboard\account\page.tsx
+  4:10  warning  'User' is defined but never used          @typescript-eslint/no-unused-vars
+  4:26  warning  'LogOut' is defined but never used        @typescript-eslint/no-unused-vars
+  4:46  warning  'BarChart3' is defined but never used     @typescript-eslint/no-unused-vars
+  4:57  warning  'Key' is defined but never used           @typescript-eslint/no-unused-vars
+  4:70  warning  'ChevronRight' is defined but never used  @typescript-eslint/no-unused-vars
+  4:97  warning  'Lock' is defined but never used          @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\dashboard\settings\api-keys\page.tsx
+  60:23  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  78:18  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\dashboard\settings\page.tsx
+  3:16  warning  'Settings' is defined but never used  @typescript-eslint/no-unused-vars
+  3:31  warning  'LogOut' is defined but never used    @typescript-eslint/no-unused-vars
+  3:53  warning  'Shield' is defined but never used    @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\documentation\page.tsx
+  352:69  error  Comments inside children section of tag should be placed inside braces  react/jsx-no-comment-textnodes
+
+D:\Script Human Web Tool\app\enterprise\api-dashboard\page.tsx
+   8:5   warning  'ArrowLeft' is defined but never used                                                           @typescript-eslint/no-unused-vars
+  38:50  error    Unexpected any. Specify a different type                                                        @typescript-eslint/no-explicit-any
+  48:9   warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps')
+
+D:\Script Human Web Tool\app\enterprise\brand-guardrails\page.tsx
+  22:21  warning  'setProfile' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+  26:13  warning  'isPremium' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+  26:91  warning  'setUpgradeMessage' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  36:24  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\Script Human Web Tool\app\enterprise\brand-guardrails\page.tsx:36:24
+  34 |     // Clear toast when text changes
+  35 |     useEffect(() => {
+> 36 |         if (showToast) setShowToast(false);
+     |                        ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  37 |     }, [text]);
+  38 |
+  39 |     const handleSanitize = () => {  react-hooks/set-state-in-effect
+  37:8   warning  React Hook useEffect has a missing dependency: 'showToast'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/exhaustive-deps
+  59:11  warning  'getStatusColor' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\enterprise\page.tsx
+   3:10   warning  'useState' is defined but never used         @typescript-eslint/no-unused-vars
+   4:8    warning  'Link' is defined but never used             @typescript-eslint/no-unused-vars
+   5:8    warning  'Image' is defined but never used            @typescript-eslint/no-unused-vars
+   6:18   warning  'AnimatePresence' is defined but never used  @typescript-eslint/no-unused-vars
+   7:10   warning  'ArrowRight' is defined but never used       @typescript-eslint/no-unused-vars
+   7:40   warning  'Lock' is defined but never used             @typescript-eslint/no-unused-vars
+   7:46   warning  'Globe' is defined but never used            @typescript-eslint/no-unused-vars
+   7:53   warning  'Server' is defined but never used           @typescript-eslint/no-unused-vars
+   7:61   warning  'Activity' is defined but never used         @typescript-eslint/no-unused-vars
+   7:71   warning  'CheckCircle' is defined but never used      @typescript-eslint/no-unused-vars
+   7:84   warning  'Building2' is defined but never used        @typescript-eslint/no-unused-vars
+   7:117  warning  'Scale' is defined but never used            @typescript-eslint/no-unused-vars
+   7:124  warning  'PenTool' is defined but never used          @typescript-eslint/no-unused-vars
+   7:133  warning  'Palette' is defined but never used          @typescript-eslint/no-unused-vars
+   7:156  warning  'BookOpen' is defined but never used         @typescript-eslint/no-unused-vars
+  12:8    warning  'ParticleSphere' is defined but never used   @typescript-eslint/no-unused-vars
+  14:8    warning  'HelpTooltip' is defined but never used      @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\enterprise\voice-clone\page.tsx
+    6:18  warning  'AnimatePresence' is defined but never used         @typescript-eslint/no-unused-vars
+    7:10  warning  'ArrowLeft' is defined but never used               @typescript-eslint/no-unused-vars
+  127:11  warning  'getMatchColor' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\login\page.tsx
+  7:31  warning  'Mail' is defined but never used        @typescript-eslint/no-unused-vars
+  7:50  warning  'Smartphone' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\payment\page.tsx
+   6:8   warning  'Footer' is defined but never used                                                              @typescript-eslint/no-unused-vars
+  32:13  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps')
+
+D:\Script Human Web Tool\app\signup\page.tsx
+  7:31  warning  'Mail' is defined but never used         @typescript-eslint/no-unused-vars
+  7:62  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\style-studio\page.tsx
+    3:20   warning  'useEffect' is defined but never used               @typescript-eslint/no-unused-vars
+    4:8    warning  'Link' is defined but never used                    @typescript-eslint/no-unused-vars
+    5:8    warning  'Image' is defined but never used                   @typescript-eslint/no-unused-vars
+    6:10   warning  'ArrowLeft' is defined but never used               @typescript-eslint/no-unused-vars
+    6:48   warning  'ChevronDown' is defined but never used             @typescript-eslint/no-unused-vars
+    6:74   warning  'PenTool' is defined but never used                 @typescript-eslint/no-unused-vars
+    6:92   warning  'Building2' is defined but never used               @typescript-eslint/no-unused-vars
+    6:103  warning  'ShieldCheck' is defined but never used             @typescript-eslint/no-unused-vars
+    6:116  warning  'HelpCircle' is defined but never used              @typescript-eslint/no-unused-vars
+    6:128  warning  'ArrowRight' is defined but never used              @typescript-eslint/no-unused-vars
+    6:140  warning  'RotateCcw' is defined but never used               @typescript-eslint/no-unused-vars
+    6:151  warning  'Wand2' is defined but never used                   @typescript-eslint/no-unused-vars
+    6:168  warning  'Info' is defined but never used                    @typescript-eslint/no-unused-vars
+    6:174  warning  'Fingerprint' is defined but never used             @typescript-eslint/no-unused-vars
+    6:187  warning  'Users' is defined but never used                   @typescript-eslint/no-unused-vars
+    6:194  warning  'Layers' is defined but never used                  @typescript-eslint/no-unused-vars
+    6:202  warning  'CheckCircle2' is defined but never used            @typescript-eslint/no-unused-vars
+    6:216  warning  'BookOpen' is defined but never used                @typescript-eslint/no-unused-vars
+   22:10   warning  'USAGE_LIMITS' is defined but never used            @typescript-eslint/no-unused-vars
+   62:13   warning  'isPremium' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  138:11   warning  'getResultText' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\trust-hub\page.tsx
+   5:8    warning  'Image' is defined but never used                    @typescript-eslint/no-unused-vars
+   7:55   warning  'TrendingUp' is defined but never used               @typescript-eslint/no-unused-vars
+   7:82   warning  'CheckCircle' is defined but never used              @typescript-eslint/no-unused-vars
+   7:95   warning  'XCircle' is defined but never used                  @typescript-eslint/no-unused-vars
+   7:104  warning  'ChevronDown' is defined but never used              @typescript-eslint/no-unused-vars
+   7:117  warning  'Check' is defined but never used                    @typescript-eslint/no-unused-vars
+   7:124  warning  'X' is defined but never used                        @typescript-eslint/no-unused-vars
+   7:127  warning  'Award' is defined but never used                    @typescript-eslint/no-unused-vars
+   7:182  warning  'Building2' is defined but never used                @typescript-eslint/no-unused-vars
+   7:193  warning  'Scan' is defined but never used                     @typescript-eslint/no-unused-vars
+   7:199  warning  'BookOpen' is defined but never used                 @typescript-eslint/no-unused-vars
+  27:22   warning  'setMetadata' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  34:12   warning  'certificateId' is assigned a value but never used   @typescript-eslint/no-unused-vars
+  35:82   warning  'upgradeMessage' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\app\verify\[id]\seal\page.tsx
+   5:8   warning  'Link' is defined but never used                                                                @typescript-eslint/no-unused-vars
+  41:13  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps')
+
+D:\Script Human Web Tool\app\writing-room\page.tsx
+    4:8    warning  'Link' is defined but never used                @typescript-eslint/no-unused-vars
+    5:10   warning  'ArrowRight' is defined but never used          @typescript-eslint/no-unused-vars
+    5:35   warning  'RotateCcw' is defined but never used           @typescript-eslint/no-unused-vars
+    5:46   warning  'Wand2' is defined but never used               @typescript-eslint/no-unused-vars
+    5:53   warning  'AlertTriangle' is defined but never used       @typescript-eslint/no-unused-vars
+    5:68   warning  'ChevronDown' is defined but never used         @typescript-eslint/no-unused-vars
+    5:81   warning  'CheckCircle2' is defined but never used        @typescript-eslint/no-unused-vars
+    5:95   warning  'ChevronRight' is defined but never used        @typescript-eslint/no-unused-vars
+    5:109  warning  'X' is defined but never used                   @typescript-eslint/no-unused-vars
+    5:122  warning  'BrainCircuit' is defined but never used        @typescript-eslint/no-unused-vars
+    5:136  warning  'Ghost' is defined but never used               @typescript-eslint/no-unused-vars
+    5:143  warning  'Volume2' is defined but never used             @typescript-eslint/no-unused-vars
+    5:180  warning  'HelpCircle' is defined but never used          @typescript-eslint/no-unused-vars
+    5:242  warning  'PenTool' is defined but never used             @typescript-eslint/no-unused-vars
+    5:251  warning  'Palette' is defined but never used             @typescript-eslint/no-unused-vars
+    5:260  warning  'Building2' is defined but never used           @typescript-eslint/no-unused-vars
+    5:271  warning  'ShieldCheck' is defined but never used         @typescript-eslint/no-unused-vars
+    5:284  warning  'Mail' is defined but never used                @typescript-eslint/no-unused-vars
+    5:290  warning  'Share2' is defined but never used              @typescript-eslint/no-unused-vars
+    5:298  warning  'User' is defined but never used                @typescript-eslint/no-unused-vars
+   10:8    warning  'Image' is defined but never used               @typescript-eslint/no-unused-vars
+   20:10   warning  'useRef' is defined but never used              @typescript-eslint/no-unused-vars
+   24:10   warning  'humanizeTextAction' is defined but never used  @typescript-eslint/no-unused-vars
+  103:13   warning  'isPremium' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\ChatWidget.tsx
+  5:49  warning  'HelpCircle' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\CookieConsent.tsx
+  12:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps')
+
+D:\Script Human Web Tool\components\EthicalOverlay.tsx
+   5:30  warning  'Lock' is defined but never used                                                                @typescript-eslint/no-unused-vars
+  13:9   warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps')
+
+D:\Script Human Web Tool\components\Hero.tsx
+  4:10  warning  'Sparkles' is defined but never used       @typescript-eslint/no-unused-vars
+  4:20  warning  'ArrowRight' is defined but never used     @typescript-eslint/no-unused-vars
+  4:32  warning  'Activity' is defined but never used       @typescript-eslint/no-unused-vars
+  4:42  warning  'CheckCircle2' is defined but never used   @typescript-eslint/no-unused-vars
+  4:56  warning  'AlertTriangle' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\HomeTestimonials.tsx
+  5:23  warning  'MessageCircle' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\HubNavigation.tsx
+   5:8   warning  'Link' is defined but never used  @typescript-eslint/no-unused-vars
+  22:35  warning  'i' is defined but never used     @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\LockedFeatureView.tsx
+  5:16  warning  'Sparkles' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\Navbar.tsx
+   7:25  warning  'Sun' is defined but never used                                                                 @typescript-eslint/no-unused-vars
+  14:38  error    Unexpected any. Specify a different type                                                        @typescript-eslint/no-explicit-any
+  28:9   warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps')
+
+D:\Script Human Web Tool\components\PremiumLock.tsx
+  3:8   warning  'HelpTooltip' is defined but never used       @typescript-eslint/no-unused-vars
+  5:39  warning  'tooltip' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\TruthVsTech.tsx
+  4:20  warning  'Zap' is defined but never used          @typescript-eslint/no-unused-vars
+  4:25  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\enterprise\EnterpriseCard.tsx
+  5:10  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+  5:23  warning  'Users' is defined but never used        @typescript-eslint/no-unused-vars
+  5:30  warning  'Code2' is defined but never used        @typescript-eslint/no-unused-vars
+  5:37  warning  'TrendingUp' is defined but never used   @typescript-eslint/no-unused-vars
+  5:49  warning  'Zap' is defined but never used          @typescript-eslint/no-unused-vars
+  5:54  warning  'FileText' is defined but never used     @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\enterprise\Testimonials.tsx
+  5:34  warning  'TrendingUp' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\enterprise\WhyChooseUs.tsx
+  11:5  warning  'Server' is defined but never used  @typescript-eslint/no-unused-vars
+  12:5  warning  'Shield' is defined but never used  @typescript-eslint/no-unused-vars
+  13:5  warning  'Globe' is defined but never used   @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\style-studio\WhyChooseUs.tsx
+   7:5  warning  'Palette' is defined but never used   @typescript-eslint/no-unused-vars
+  12:5  warning  'Mic2' is defined but never used      @typescript-eslint/no-unused-vars
+  13:5  warning  'Sparkles' is defined but never used  @typescript-eslint/no-unused-vars
+  14:5  warning  'Variable' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\trust-hub\MediaVerifier.tsx
+  196:45  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+D:\Script Human Web Tool\components\trust-hub\VerifiedSeal.tsx
+  23:5  warning  'textHash' is defined but never used  @typescript-eslint/no-unused-vars
+  25:5  warning  'verdict' is defined but never used   @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\trust-hub\VerifyCertificate.tsx
+   4:10  warning  'useRouter' is defined but never used  @typescript-eslint/no-unused-vars
+   5:68  warning  'QrCode' is defined but never used     @typescript-eslint/no-unused-vars
+  48:18  warning  'err' is defined but never used        @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\trust-hub\WhyChooseUs.tsx
+  12:5  warning  'FileText' is defined but never used                  @typescript-eslint/no-unused-vars
+  18:7  warning  'AnimatedCounter' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\writing-room\QuickTip.tsx
+  3:10  warning  'useState' is defined but never used   @typescript-eslint/no-unused-vars
+  3:20  warning  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\writing-room\WhyChooseUs.tsx
+  7:5  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+  8:5  warning  'Zap' is defined but never used          @typescript-eslint/no-unused-vars
+  9:5  warning  'Users' is defined but never used        @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\components\writing-room\WritingRoomSidebar.tsx
+  3:10  warning  'User' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\hooks\use-free-tier.ts
+  25:13  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps')
+
+D:\Script Human Web Tool\lib\certificate-generator.ts
+   6:34  warning  'reject' is defined but never used                                                                                                                             @typescript-eslint/no-unused-vars
+  31:14  warning  'e' is defined but never used                                                                                                                                  @typescript-eslint/no-unused-vars
+  45:13  error    Include a description after the "@ts-expect-error" directive to explain why the @ts-expect-error is necessary. The description must be 3 characters or longer  @typescript-eslint/ban-ts-comment
+
+D:\Script Human Web Tool\lib\locale-injector.ts
+   31:11  warning  'PhrasePair' is defined but never used     @typescript-eslint/no-unused-vars
+  333:64  warning  'itemIntensity' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\lib\supabase\server.ts
+  1:35  warning  'CookieOptions' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\lib\trust-hub\ai-media-detector.ts
+  322:23  warning  'width' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  448:79  warning  'contentType' is defined but never used     @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\lib\trust-hub\forensic-engine.ts
+   18:54  warning  'metadata' is defined but never used                 @typescript-eslint/no-unused-vars
+   51:15  warning  'conclusionSDSL' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  450:53  warning  'metadata' is defined but never used                 @typescript-eslint/no-unused-vars
+  699:11  warning  'contractions' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\lib\trust-hub\pdf-generator.ts
+   11:9  warning  'timestamp' is assigned a value but never used                                                                                                                 @typescript-eslint/no-unused-vars
+  104:5  error    Include a description after the "@ts-expect-error" directive to explain why the @ts-expect-error is necessary. The description must be 3 characters or longer  @typescript-eslint/ban-ts-comment
+  106:7  error    Include a description after the "@ts-expect-error" directive to explain why the @ts-expect-error is necessary. The description must be 3 characters or longer  @typescript-eslint/ban-ts-comment
+  108:7  error    Include a description after the "@ts-expect-error" directive to explain why the @ts-expect-error is necessary. The description must be 3 characters or longer  @typescript-eslint/ban-ts-comment
+  119:7  error    Include a description after the "@ts-expect-error" directive to explain why the @ts-expect-error is necessary. The description must be 3 characters or longer  @typescript-eslint/ban-ts-comment
+  127:5  error    Include a description after the "@ts-expect-error" directive to explain why the @ts-expect-error is necessary. The description must be 3 characters or longer  @typescript-eslint/ban-ts-comment
+
+D:\Script Human Web Tool\lib\trust-hub\recommendation-applier.ts
+  116:49  warning  'mood' is defined but never used  @typescript-eslint/no-unused-vars
+  182:41  warning  'mood' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Script Human Web Tool\lib\vibe-audit.ts
+  75:15  warning  'wordCount' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Γ£û 195 problems (14 errors, 181 warnings)
+  2 errors and 7 warnings potentially fixable with the `--fix` option.
+

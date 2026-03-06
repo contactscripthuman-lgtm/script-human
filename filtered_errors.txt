@@ -1,0 +1,6 @@
+
+> Build error occurred
+Error: Turbopack build failed with 2 errors:
+Module not found: Can't resolve 'react-markdown'
+Module not found: Can't resolve 'remark-gfm'
+

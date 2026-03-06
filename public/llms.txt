@@ -1,0 +1,22 @@
+
+# ScriptHuman
+
+ScriptHuman is an AI text humanization platform that rewrites AI-generated content to bypass AI detectors and restore natural human flow.
+
+## Core Features
+1. **The Writing Room**: Main humanization engine with "Humanity Pulse" visualization.
+2. **Style Studio**: Customize tone (Professional, Casual, Academic) and vocabulary level.
+3. **Trust Hub**: Verify content authenticity, generate certificates, and analyze "vibe" metrics.
+4. **Enterprise Hub**: Bulk processing and API access for high-volume needs.
+
+## API Access
+Developers can integrate ScriptHuman via our REST API.
+- Documentation: https://scripthuman.ai/documentation
+- Base URL: https://scripthuman.ai/api
+
+## Usage
+Paste AI text into the editor on the homepage or Writing Room, select a mode (Standard, Fluency, Creative), and click "Humanize".
+
+## Contact
+Support: support@scripthuman.ai
+Twitter: @ScriptHumanAI

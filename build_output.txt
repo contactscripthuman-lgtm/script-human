@@ -1,0 +1,46 @@
+
+> scripthuman@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+
+ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 2 errors:
+./app/blog/[slug]/page.tsx:5:1
+Module not found: Can't resolve 'react-markdown'
+  3 | import ToolNavbar from '@/components/ToolNavbar';
+  4 | import Footer from '@/components/Footer';
+> 5 | import Markdown from 'react-markdown';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import remarkGfm from 'remark-gfm';
+  7 | import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+  8 | import Link from 'next/link';
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/blog/[slug]/page.tsx:6:1
+Module not found: Can't resolve 'remark-gfm'
+  4 | import Footer from '@/components/Footer';
+  5 | import Markdown from 'react-markdown';
+> 6 | import remarkGfm from 'remark-gfm';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+  8 | import Link from 'next/link';
+  9 | import ComparisonTable from '@/components/blog/ComparisonTable';
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./app/blog/[slug]/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/blog/[slug]/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

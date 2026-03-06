@@ -1,0 +1,1327 @@
+{
+  "SH-2026-763DD965-3329": {
+    "certificateId": "SH-2026-763DD965-3329",
+    "textHash": "8dfd8d9673f0548aed4cad4d0fdf077a72160e8409c19e3da837067a16390da6",
+    "confidenceScore": 82,
+    "verdict": "low",
+    "issuedAt": "2026-02-07T07:32:03.326Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 26.809989000446862,
+        "burstiness": 20,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 72.09,
+        "stylisticIdiosyncrasies": 2
+      },
+      "quality": {
+        "score": 62,
+        "readabilityScore": 58,
+        "gradeLevel": 9.7,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 89,
+        "uniquenessScore": 77,
+        "clicheCount": 0,
+        "freshInsights": true,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 80,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 129,
+      "sentenceCount": 7,
+      "paragraphCount": 19,
+      "avgWordsPerSentence": 18.4
+    }
+  },
+  "SH-2026-45E5273E-9661": {
+    "certificateId": "SH-2026-45E5273E-9661",
+    "textHash": "a50acbceb32c2b6bacfa6141f527bc893e194acd7b4e53f6bd26326f363b7ed9",
+    "confidenceScore": 85,
+    "verdict": "minimal",
+    "issuedAt": "2026-02-07T07:36:39.660Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 26.687491868330792,
+        "burstiness": 20,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 75,
+        "stylisticIdiosyncrasies": 1
+      },
+      "quality": {
+        "score": 70,
+        "readabilityScore": 55,
+        "gradeLevel": 8.8,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 88,
+        "uniquenessScore": 76,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 80,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 78,
+      "sentenceCount": 6,
+      "paragraphCount": 16,
+      "avgWordsPerSentence": 13
+    }
+  },
+  "SH-2026-C976F7CC-4625": {
+    "certificateId": "SH-2026-C976F7CC-4625",
+    "textHash": "1534f41e6b0ba4f0c1dc88a863681b0b08994a62034544b76ff5f23bd2a6c713",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-07T08:36:44.623Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 11.626577136817495,
+        "burstiness": 17.439865705226243,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 83.44,
+        "stylisticIdiosyncrasies": 5
+      },
+      "quality": {
+        "score": 53,
+        "readabilityScore": 27,
+        "gradeLevel": 12.9,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 83,
+        "uniquenessScore": 67,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 95,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 76,
+        "citationsPresent": false,
+        "factCheckSignals": 2,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 391,
+      "sentenceCount": 28,
+      "paragraphCount": 2,
+      "avgWordsPerSentence": 14
+    }
+  },
+  "SH-2026-F759888A-5646": {
+    "certificateId": "SH-2026-F759888A-5646",
+    "textHash": "4e74529e2a9026c49ad7ccead65822f3178d1facefdb25330094d9513d236170",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-09T10:01:35.625Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 13.513737223655045,
+        "burstiness": 20,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 80.15,
+        "stylisticIdiosyncrasies": 3
+      },
+      "quality": {
+        "score": 53,
+        "readabilityScore": 26,
+        "gradeLevel": 14.5,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 83,
+        "uniquenessScore": 68,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 95,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 76,
+        "citationsPresent": false,
+        "factCheckSignals": 2,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 313,
+      "sentenceCount": 16,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 19.6
+    }
+  },
+  "SH-2026-AF678BF3-6937": {
+    "certificateId": "SH-2026-AF678BF3-6937",
+    "textHash": "4e74529e2a9026c49ad7ccead65822f3178d1facefdb25330094d9513d236170",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-09T10:05:56.936Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 13.513737223655045,
+        "burstiness": 20,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 80.15,
+        "stylisticIdiosyncrasies": 3
+      },
+      "quality": {
+        "score": 53,
+        "readabilityScore": 26,
+        "gradeLevel": 14.5,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 83,
+        "uniquenessScore": 68,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 95,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 76,
+        "citationsPresent": false,
+        "factCheckSignals": 2,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 313,
+      "sentenceCount": 16,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 19.6
+    }
+  },
+  "SH-2026-4B396C27-9621": {
+    "certificateId": "SH-2026-4B396C27-9621",
+    "textHash": "e2979c4372dd3892d856194fb57aae771e992af3224e73164d838f657e88c35f",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-09T10:09:19.618Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 12.66736840161453,
+        "burstiness": 19.001052602421794,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 84.31,
+        "stylisticIdiosyncrasies": 5
+      },
+      "quality": {
+        "score": 50,
+        "readabilityScore": 17,
+        "gradeLevel": 14.8,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 88,
+        "uniquenessScore": 75,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 78,
+        "citationsPresent": false,
+        "factCheckSignals": 1,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 236,
+      "sentenceCount": 15,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 15.7
+    }
+  },
+  "SH-2026-26C38E34-3490": {
+    "certificateId": "SH-2026-26C38E34-3490",
+    "textHash": "e2979c4372dd3892d856194fb57aae771e992af3224e73164d838f657e88c35f",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-09T10:15:13.489Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 12.66736840161453,
+        "burstiness": 19.001052602421794,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 84.31,
+        "stylisticIdiosyncrasies": 5
+      },
+      "quality": {
+        "score": 50,
+        "readabilityScore": 17,
+        "gradeLevel": 14.8,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 88,
+        "uniquenessScore": 75,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 78,
+        "citationsPresent": false,
+        "factCheckSignals": 1,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 236,
+      "sentenceCount": 15,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 15.7
+    }
+  },
+  "SH-2026-BCA4BFE6-1163": {
+    "certificateId": "SH-2026-BCA4BFE6-1163",
+    "textHash": "e2979c4372dd3892d856194fb57aae771e992af3224e73164d838f657e88c35f",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-09T10:18:21.160Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 12.66736840161453,
+        "burstiness": 19.001052602421794,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 84.31,
+        "stylisticIdiosyncrasies": 5
+      },
+      "quality": {
+        "score": 50,
+        "readabilityScore": 17,
+        "gradeLevel": 14.8,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 88,
+        "uniquenessScore": 75,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 78,
+        "citationsPresent": false,
+        "factCheckSignals": 1,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 236,
+      "sentenceCount": 15,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 15.7
+    }
+  },
+  "SH-2026-9C026BB1-1617": {
+    "certificateId": "SH-2026-9C026BB1-1617",
+    "textHash": "e2979c4372dd3892d856194fb57aae771e992af3224e73164d838f657e88c35f",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-09T10:23:01.616Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 12.66736840161453,
+        "burstiness": 19.001052602421794,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 84.31,
+        "stylisticIdiosyncrasies": 5
+      },
+      "quality": {
+        "score": 50,
+        "readabilityScore": 17,
+        "gradeLevel": 14.8,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 88,
+        "uniquenessScore": 75,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 78,
+        "citationsPresent": false,
+        "factCheckSignals": 1,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 236,
+      "sentenceCount": 15,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 15.7
+    }
+  },
+  "SH-2026-B72DB87A-0607": {
+    "certificateId": "SH-2026-B72DB87A-0607",
+    "textHash": "e2979c4372dd3892d856194fb57aae771e992af3224e73164d838f657e88c35f",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-09T10:24:50.606Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 12.66736840161453,
+        "burstiness": 19.001052602421794,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 84.31,
+        "stylisticIdiosyncrasies": 5
+      },
+      "quality": {
+        "score": 50,
+        "readabilityScore": 17,
+        "gradeLevel": 14.8,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 88,
+        "uniquenessScore": 75,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 78,
+        "citationsPresent": false,
+        "factCheckSignals": 1,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 236,
+      "sentenceCount": 15,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 15.7
+    }
+  },
+  "SH-2026-AD1A75A8-3174": {
+    "certificateId": "SH-2026-AD1A75A8-3174",
+    "textHash": "e2979c4372dd3892d856194fb57aae771e992af3224e73164d838f657e88c35f",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-09T10:26:33.171Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 12.66736840161453,
+        "burstiness": 19.001052602421794,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 84.31,
+        "stylisticIdiosyncrasies": 5
+      },
+      "quality": {
+        "score": 50,
+        "readabilityScore": 17,
+        "gradeLevel": 14.8,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 88,
+        "uniquenessScore": 75,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 78,
+        "citationsPresent": false,
+        "factCheckSignals": 1,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 236,
+      "sentenceCount": 15,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 15.7
+    }
+  },
+  "SH-2026-F8ADE908-0426": {
+    "certificateId": "SH-2026-F8ADE908-0426",
+    "textHash": "e2979c4372dd3892d856194fb57aae771e992af3224e73164d838f657e88c35f",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-09T10:31:50.423Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 12.66736840161453,
+        "burstiness": 19.001052602421794,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 84.31,
+        "stylisticIdiosyncrasies": 5
+      },
+      "quality": {
+        "score": 50,
+        "readabilityScore": 17,
+        "gradeLevel": 14.8,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 88,
+        "uniquenessScore": 75,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 78,
+        "citationsPresent": false,
+        "factCheckSignals": 1,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 236,
+      "sentenceCount": 15,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 15.7
+    }
+  },
+  "SH-2026-91C413D4-9620": {
+    "certificateId": "SH-2026-91C413D4-9620",
+    "textHash": "de2c33d32aa275af45f2eb021723e61e26a5b5c7a6486dab0c8c3f7c4e7cf5a6",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-09T10:35:39.616Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 12.50749775134899,
+        "burstiness": 18.761246627023482,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 80.39,
+        "stylisticIdiosyncrasies": 4
+      },
+      "quality": {
+        "score": 52,
+        "readabilityScore": 24,
+        "gradeLevel": 13.5,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 86,
+        "uniquenessScore": 72,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 76,
+        "citationsPresent": false,
+        "factCheckSignals": 2,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 236,
+      "sentenceCount": 16,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 14.8
+    }
+  },
+  "SH-2026-26FB2428-0347": {
+    "certificateId": "SH-2026-26FB2428-0347",
+    "textHash": "13ec39946a4f8b9433e2730470413132dbfe874bd926614ef5cb72e377cb070a",
+    "confidenceScore": 81,
+    "verdict": "low",
+    "issuedAt": "2026-02-10T07:50:40.344Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 11.871815362445627,
+        "burstiness": 17.80772304366844,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 83.72,
+        "stylisticIdiosyncrasies": 4
+      },
+      "quality": {
+        "score": 61,
+        "readabilityScore": 35,
+        "gradeLevel": 12.2,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 75,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 85,
+        "uniquenessScore": 70,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 80,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 307,
+      "sentenceCount": 20,
+      "paragraphCount": 1,
+      "avgWordsPerSentence": 15.4
+    }
+  },
+  "SH-2026-482809ED-2386": {
+    "certificateId": "SH-2026-482809ED-2386",
+    "textHash": "2ef1d02468e991aa60f81044dd1562b7972a553b5aef54559903129432e005c3",
+    "confidenceScore": 81,
+    "verdict": "low",
+    "issuedAt": "2026-02-10T08:00:32.385Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 11.867602959317436,
+        "burstiness": 17.801404438976153,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 77.88,
+        "stylisticIdiosyncrasies": 5
+      },
+      "quality": {
+        "score": 59,
+        "readabilityScore": 37,
+        "gradeLevel": 11.7,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 67,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 86,
+        "uniquenessScore": 73,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 95,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 80,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 290,
+      "sentenceCount": 20,
+      "paragraphCount": 10,
+      "avgWordsPerSentence": 14.5
+    }
+  },
+  "SH-2026-25976DC5-0147": {
+    "certificateId": "SH-2026-25976DC5-0147",
+    "textHash": "2ef1d02468e991aa60f81044dd1562b7972a553b5aef54559903129432e005c3",
+    "confidenceScore": 81,
+    "verdict": "low",
+    "issuedAt": "2026-02-10T08:04:30.146Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 11.867602959317436,
+        "burstiness": 17.801404438976153,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 77.88,
+        "stylisticIdiosyncrasies": 5
+      },
+      "quality": {
+        "score": 59,
+        "readabilityScore": 37,
+        "gradeLevel": 11.7,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 67,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 86,
+        "uniquenessScore": 73,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 95,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 80,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 290,
+      "sentenceCount": 20,
+      "paragraphCount": 10,
+      "avgWordsPerSentence": 14.5
+    }
+  },
+  "SH-2026-D6DC019B-4131": {
+    "certificateId": "SH-2026-D6DC019B-4131",
+    "textHash": "310162fc79a196b1ce30fd9eb4751a66fd46a44b71733f36bf16caba4d190893",
+    "confidenceScore": 78,
+    "verdict": "low",
+    "issuedAt": "2026-02-10T08:24:24.129Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 12.600324047022179,
+        "burstiness": 18.90048607053327,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 82.44,
+        "stylisticIdiosyncrasies": 4
+      },
+      "quality": {
+        "score": 51,
+        "readabilityScore": 20,
+        "gradeLevel": 14.9,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 85,
+        "uniquenessScore": 71,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 95,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 78,
+        "citationsPresent": false,
+        "factCheckSignals": 1,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 302,
+      "sentenceCount": 17,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 17.8
+    }
+  },
+  "SH-2026-5730F4F2-0721": {
+    "certificateId": "SH-2026-5730F4F2-0721",
+    "textHash": "e5f224ce2e81ca93f05b38ee5521747ea0e327bef56e8de463d46913efc22579",
+    "confidenceScore": 77,
+    "verdict": "low",
+    "issuedAt": "2026-02-10T08:44:10.717Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 13.450485327881504,
+        "burstiness": 20,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 84.35,
+        "stylisticIdiosyncrasies": 4
+      },
+      "quality": {
+        "score": 49,
+        "readabilityScore": 14,
+        "gradeLevel": 15.6,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 87,
+        "uniquenessScore": 73,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 78,
+        "citationsPresent": false,
+        "factCheckSignals": 1,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 263,
+      "sentenceCount": 15,
+      "paragraphCount": 9,
+      "avgWordsPerSentence": 17.5
+    }
+  },
+  "SH-2026-70A03763-0375": {
+    "certificateId": "SH-2026-70A03763-0375",
+    "textHash": "863d04cfe2621d3b8c77f25a9dcde5dda95ceb1f47e6369e5663ab4bce3fde55",
+    "confidenceScore": 85,
+    "verdict": "minimal",
+    "issuedAt": "2026-02-10T11:35:10.373Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 6.869315832017043,
+        "burstiness": 10.303973748025564,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 71.43,
+        "stylisticIdiosyncrasies": 1
+      },
+      "quality": {
+        "score": 79,
+        "readabilityScore": 63,
+        "gradeLevel": 6.6,
+        "grammarIssues": 1,
+        "structureScore": 100,
+        "engagementScore": 50,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 71,
+        "uniquenessScore": 64,
+        "clicheCount": 0,
+        "freshInsights": false,
+        "repetitionScore": 45,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 80,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 136,
+      "sentenceCount": 16,
+      "paragraphCount": 7,
+      "avgWordsPerSentence": 8.5
+    }
+  },
+  "SH-2026-C194FF96-3592": {
+    "certificateId": "SH-2026-C194FF96-3592",
+    "textHash": "c75c9743b0c21f05afdd19ffdb031f646d18c7fdb2122da5cae69e3b71266dfc",
+    "confidenceScore": 81,
+    "verdict": "low",
+    "issuedAt": "2026-02-10T11:46:03.590Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 12.74323349860623,
+        "burstiness": 19.114850247909345,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 81.95,
+        "stylisticIdiosyncrasies": 7
+      },
+      "quality": {
+        "score": 61,
+        "readabilityScore": 38,
+        "gradeLevel": 12.2,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 75,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 83,
+        "uniquenessScore": 68,
+        "clicheCount": 0,
+        "freshInsights": true,
+        "repetitionScore": 95,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 80,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 336,
+      "sentenceCount": 20,
+      "paragraphCount": 1,
+      "avgWordsPerSentence": 16.8
+    }
+  },
+  "SH-2026-8BBA48CA-7990": {
+    "certificateId": "SH-2026-8BBA48CA-7990",
+    "textHash": "e06359110e3e2325499e28a8e30b0b893ad3892ac212662415edfcd6dbc8890e",
+    "confidenceScore": 84,
+    "verdict": "low",
+    "issuedAt": "2026-02-10T13:28:57.988Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 8.583399121818179,
+        "burstiness": 12.875098682727268,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 76.19,
+        "stylisticIdiosyncrasies": 2
+      },
+      "quality": {
+        "score": 69,
+        "readabilityScore": 46,
+        "gradeLevel": 8.9,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 100,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 86,
+        "uniquenessScore": 72,
+        "clicheCount": 0,
+        "freshInsights": true,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 80,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 136,
+      "sentenceCount": 17,
+      "paragraphCount": 1,
+      "avgWordsPerSentence": 8
+    }
+  },
+  "SH-2026-0790AAB3-2999": {
+    "certificateId": "SH-2026-0790AAB3-2999",
+    "textHash": "4b8db505a63d040f23a7156d429effd47389021416caf8586846d8bedf3684e6",
+    "confidenceScore": 82,
+    "verdict": "low",
+    "issuedAt": "2026-02-10T13:32:52.998Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 10.084761878464395,
+        "burstiness": 15.127142817696592,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 82.35,
+        "stylisticIdiosyncrasies": 1
+      },
+      "quality": {
+        "score": 64,
+        "readabilityScore": 45,
+        "gradeLevel": 9.4,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 75,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 88,
+        "uniquenessScore": 75,
+        "clicheCount": 0,
+        "freshInsights": true,
+        "repetitionScore": 100,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 77,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 1,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 171,
+      "sentenceCount": 17,
+      "paragraphCount": 1,
+      "avgWordsPerSentence": 10.1
+    }
+  },
+  "SH-2026-4CDBB01A-4390": {
+    "certificateId": "SH-2026-4CDBB01A-4390",
+    "textHash": "0c13cb51f26dc1aa54eef5f46231db58dc861ff9317ad38a05e8df1c437fe473",
+    "confidenceScore": 80,
+    "verdict": "low",
+    "issuedAt": "2026-02-10T13:37:54.388Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 16.537457482938542,
+        "burstiness": 20,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 83.22,
+        "stylisticIdiosyncrasies": 7
+      },
+      "quality": {
+        "score": 60,
+        "readabilityScore": 34,
+        "gradeLevel": 12.9,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 75,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 80,
+        "uniquenessScore": 68,
+        "clicheCount": 0,
+        "freshInsights": true,
+        "repetitionScore": 80,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 80,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 349,
+      "sentenceCount": 20,
+      "paragraphCount": 1,
+      "avgWordsPerSentence": 17.5
+    }
+  },
+  "SH-2026-CC59DF4E-1176": {
+    "certificateId": "SH-2026-CC59DF4E-1176",
+    "textHash": "0c13cb51f26dc1aa54eef5f46231db58dc861ff9317ad38a05e8df1c437fe473",
+    "confidenceScore": 80,
+    "verdict": "low",
+    "issuedAt": "2026-02-10T13:40:21.174Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 16.537457482938542,
+        "burstiness": 20,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 83.22,
+        "stylisticIdiosyncrasies": 7
+      },
+      "quality": {
+        "score": 60,
+        "readabilityScore": 34,
+        "gradeLevel": 12.9,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 75,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 80,
+        "uniquenessScore": 68,
+        "clicheCount": 0,
+        "freshInsights": true,
+        "repetitionScore": 80,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 80,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 349,
+      "sentenceCount": 20,
+      "paragraphCount": 1,
+      "avgWordsPerSentence": 17.5
+    }
+  },
+  "SH-2026-967567FF-6800": {
+    "certificateId": "SH-2026-967567FF-6800",
+    "textHash": "facfa64072b25907014b97d8eb8aa60241f8e573b309ab70fb7aff7d384f2e44",
+    "confidenceScore": 83,
+    "verdict": "low",
+    "issuedAt": "2026-02-10T13:46:56.799Z",
+    "layers": {
+      "authenticity": {
+        "score": 100,
+        "aiLikelihood": 0,
+        "sdsl": 11.469569320953742,
+        "burstiness": 17.204353981430614,
+        "aiPatterns": [],
+        "metadataScore": 0,
+        "confidence": 100,
+        "smogDensity": 0,
+        "hedgingScore": 0,
+        "rareWordRatio": 79.13,
+        "stylisticIdiosyncrasies": 6
+      },
+      "quality": {
+        "score": 65,
+        "readabilityScore": 35,
+        "gradeLevel": 11.8,
+        "grammarIssues": 0,
+        "structureScore": 70,
+        "engagementScore": 100,
+        "confidence": 100
+      },
+      "originality": {
+        "score": 86,
+        "uniquenessScore": 74,
+        "clicheCount": 0,
+        "freshInsights": true,
+        "repetitionScore": 95,
+        "confidence": 100
+      },
+      "credibility": {
+        "score": 80,
+        "citationsPresent": false,
+        "factCheckSignals": 0,
+        "biasIndicators": 0,
+        "sourceQuality": 50,
+        "confidence": 100
+      }
+    },
+    "metrics": {
+      "wordCount": 285,
+      "sentenceCount": 21,
+      "paragraphCount": 1,
+      "avgWordsPerSentence": 13.6
+    }
+  }
+}
