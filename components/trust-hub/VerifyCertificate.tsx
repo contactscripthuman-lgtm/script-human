@@ -1,8 +1,8 @@
 "use client";
 
-import { useState} from"react";
-import { useRouter} from"next/navigation";
-import { ShieldCheck, Search, CheckCircle, AlertTriangle, Loader2, QrCode, Fingerprint} from"lucide-react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ShieldCheck, Search, CheckCircle, AlertTriangle, Loader2, QrCode, Fingerprint } from "lucide-react";
 
 interface VerificationResult {
     certificateId: string;
@@ -11,11 +11,11 @@ interface VerificationResult {
     verdict: string;
     issuedAt: string;
     layers: {
-        authenticity: { score: number};
-        quality: { score: number};
-        originality: { score: number};
-        credibility: { score: number};
-   };
+        authenticity: { score: number };
+        quality: { score: number };
+        originality: { score: number };
+        credibility: { score: number };
+    };
     metrics: Record<string, unknown>;
 }
 
@@ -34,23 +34,24 @@ export default function VerifyCertificate() {
         setResult(null);
 
         try {
-            const response = await fetch(`/api/trust-hub/verify?id=${encodeURIComponent(certId.trim())}`);
+            const response = await fetch(`/api/trust-hub/verify?id=${encodeURIComponent(certId.trim().replace(/^certificate\s*id\s*[:\-]?\s*/i, "").trim())}`);
+
             if (!response.ok) {
                 if (response.status === 404) {
                     setError("Certificate not found");
-               } else {
+                } else {
                     setError("Verification failed");
-               }
+                }
                 return;
-           }
+            }
             const data = await response.json();
             setResult(data);
-       } catch (err) {
+        } catch (err) {
             setError("Something went wrong");
-       } finally {
+        } finally {
             setLoading(false);
-       }
-   };
+        }
+    };
 
     return (
         <section className="py-12 px-6 max-w-4xl mx-auto">
@@ -80,7 +81,7 @@ export default function VerifyCertificate() {
                     disabled={!certId.trim() || loading}
                     className="absolute right-2 px-6 py-2 bg-emerald-600 text-white rounded-lg text-sm font-bold hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-display"
                 >
-                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> :"Verify"}
+                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Verify"}
                 </button>
             </form>
 
@@ -115,7 +116,7 @@ export default function VerifyCertificate() {
                                 </div>
                             </div>
                             <div className="text-right text-[10px] text-gray-400 dark:text-white font-mono">
-                                <div>Issue Date: {new Date(result.issuedAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric'})}</div>
+                                <div>Issue Date: {new Date(result.issuedAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</div>
                                 <div>ID: {result.certificateId}</div>
                             </div>
                         </div>
@@ -168,7 +169,7 @@ export default function VerifyCertificate() {
                             <div className="mb-10">
                                 <h4 className="flex items-center gap-2 font-bold text-gray-900 dark:text-white mb-6 font-display">
                                     <div className="w-5 h-5 bg-gray-900 text-white rounded flex items-center justify-center text-xs">
-                                        <span className="transform rotate-90 whitespace-nowrap" style={{ fontSize: '8px'}}>|||</span>
+                                        <span className="transform rotate-90 whitespace-nowrap" style={{ fontSize: '8px' }}>|||</span>
                                     </div>
                                     Linguistic Breakdown
                                 </h4>
@@ -183,7 +184,7 @@ export default function VerifyCertificate() {
                                         <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                                             <div
                                                 className="h-full bg-emerald-500 rounded-full transition-all duration-1000 ease-out"
-                                                style={{ width:`${result.layers.authenticity.score}%`}}
+                                                style={{ width: `${result.layers.authenticity.score}%` }}
                                             />
                                         </div>
                                     </div>
@@ -197,7 +198,7 @@ export default function VerifyCertificate() {
                                         <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                                             <div
                                                 className="h-full bg-emerald-500 rounded-full transition-all duration-1000 ease-out"
-                                                style={{ width:`${result.layers.originality.score}%`}}
+                                                style={{ width: `${result.layers.originality.score}%` }}
                                             />
                                         </div>
                                     </div>
@@ -211,7 +212,7 @@ export default function VerifyCertificate() {
                                         <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                                             <div
                                                 className="h-full bg-emerald-500 rounded-full transition-all duration-1000 ease-out"
-                                                style={{ width:`${result.layers.quality.score}%`}}
+                                                style={{ width: `${result.layers.quality.score}%` }}
                                             />
                                         </div>
                                     </div>
