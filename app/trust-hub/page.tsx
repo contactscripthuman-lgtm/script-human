@@ -36,7 +36,7 @@ function TrustHubContent() {
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [result, setResult] = useState<ForensicAnalysisResult | null>(null);
     const [certificateId, setCertificateId] = useState<string | null>(null);
-    const { isPremium, hasTrustHubAccess, showUpgradeModal, setShowUpgradeModal, upgradeMessage, setUpgradeMessage } = useFreeTier();
+    const { isPremium, hasTrustHubAccess, hasCertificateAccess, showUpgradeModal, setShowUpgradeModal, upgradeMessage, setUpgradeMessage } = useFreeTier();
 
     // Custom props for the upgrade modal when triggered from separate features
     const [upgradeModalProps, setUpgradeModalProps] = useState<{
@@ -60,7 +60,8 @@ function TrustHubContent() {
         }
     };
 
-    const isLocked = !hasTrustHubAccess;
+    const isLocked = !hasTrustHubAccess;         // Locks entire Trust Hub analysis section
+    const isCertificateLocked = !hasCertificateAccess; // Locks only the certificate download (Pro can still analyze)
 
     const handleUnlockCertificate = () => {
         setUpgradeMessage("Unlock official certificates to prove your content's authenticity.");
@@ -282,7 +283,7 @@ function TrustHubContent() {
                                             result={result}
                                             onCertify={(id) => setCertificateId(id)}
                                             theme="light"
-                                            isLocked={isLocked}
+                                            isLocked={isCertificateLocked}
                                             onUnlock={handleUnlockCertificate}
                                         />
 

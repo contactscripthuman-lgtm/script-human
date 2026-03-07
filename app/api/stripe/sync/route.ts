@@ -1,35 +1,8 @@
 import { NextResponse } from 'next/server';
 import { adminDb, admin } from '@/lib/firebase-admin';
 import { stripe } from '@/lib/stripe';
+import { getPlanDetails, FREE_PLAN } from '@/lib/stripe-plans';
 import Stripe from 'stripe';
-
-function getPlanDetails(priceId: string) {
-    switch (priceId) {
-        case process.env.NEXT_PUBLIC_STRIPE_ENTERPRISE_PRICE_ID:
-        case 'price_enterprise':
-            return {
-                planType: 'Enterprise',
-                features: { humanizeLimit: -1, bypassesLimit: -1, forensicAnalysis: true }
-            };
-        case process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID:
-        case 'price_pro':
-            return {
-                planType: 'Pro',
-                features: { humanizeLimit: 50, bypassesLimit: 100, forensicAnalysis: false }
-            };
-        case process.env.NEXT_PUBLIC_STRIPE_CERTIFICATE_PRICE_ID:
-        case 'price_cert':
-            return {
-                planType: 'Certificate',
-                features: { humanizeLimit: -1, bypassesLimit: -1, forensicAnalysis: true }
-            };
-        default:
-            return {
-                planType: 'Free',
-                features: { humanizeLimit: 5, bypassesLimit: 10, forensicAnalysis: false }
-            };
-    }
-}
 
 export async function POST(req: Request) {
     try {
@@ -79,13 +52,14 @@ export async function POST(req: Request) {
         }
 
         const priceId = subscription.items.data[0].price.id;
+        const isActive = subscription.status === 'active' || subscription.status === 'trialing';
         const { planType, features } = getPlanDetails(priceId);
 
-        const updateData: any = {
-            planType: subscription.status === 'active' || subscription.status === 'trialing' ? planType : 'Free',
+        const updateData: Record<string, unknown> = {
+            planType: isActive ? planType : FREE_PLAN.planType,
             status: subscription.status,
             currentPeriodEnd: admin.firestore.Timestamp.fromMillis((subscription as any).current_period_end * 1000),
-            features,
+            features: isActive ? features : FREE_PLAN.features,
             stripeSubscriptionId: subscription.id,
             updatedAt: admin.firestore.FieldValue.serverTimestamp(),
         };
@@ -97,10 +71,11 @@ export async function POST(req: Request) {
         // Update Firebase with the definitive source of truth from Stripe
         await subscriptionDocRef.set(updateData, { merge: true });
 
+        const resolvedPlan = isActive ? planType : FREE_PLAN.planType;
         return NextResponse.json({
             success: true,
             message: 'Successfully synced subscription from Stripe',
-            planType: subscription.status === 'active' || subscription.status === 'trialing' ? planType : 'Free'
+            planType: resolvedPlan,
         });
 
     } catch (error: any) {

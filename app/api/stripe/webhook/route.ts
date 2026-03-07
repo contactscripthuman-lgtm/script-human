@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { adminDb, admin } from '@/lib/firebase-admin';
+import { getPlanDetails, FREE_PLAN } from '@/lib/stripe-plans';
 import Stripe from 'stripe';
 
 export async function POST(req: Request) {
@@ -57,16 +58,14 @@ async function handleSubscriptionCreated(session: Stripe.Checkout.Session) {
 
     const isActive = subscription.status === 'active' || subscription.status === 'trialing';
     const details = getPlanDetails(priceId);
-    const freeDetails = getPlanDetails('free');
 
-    // Storing under users/{uid}/subscription/current to match plan requirements and support easy fetching
     await adminDb.collection('users').doc(uid).collection('subscription').doc('current').set({
         stripeCustomerId: session.customer,
         stripeSubscriptionId: subscription.id,
-        planType: isActive ? details.planType : 'Free',
+        planType: isActive ? details.planType : FREE_PLAN.planType,
         status: subscription.status,
         currentPeriodEnd: admin.firestore.Timestamp.fromMillis((subscription as any).current_period_end * 1000),
-        features: isActive ? details.features : freeDetails.features,
+        features: isActive ? details.features : FREE_PLAN.features,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     }, { merge: true });
 }
@@ -88,15 +87,14 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
 
     const isActive = subscription.status === 'active' || subscription.status === 'trialing';
     const details = getPlanDetails(priceId);
-    const freeDetails = getPlanDetails('free');
 
     await doc.ref.update({
-        planType: isActive ? details.planType : 'Free',
+        planType: isActive ? details.planType : FREE_PLAN.planType,
         status: subscription.status,
         currentPeriodEnd: admin.firestore.Timestamp.fromMillis((subscription as any).current_period_end * 1000),
-        features: isActive ? details.features : freeDetails.features,
+        features: isActive ? details.features : FREE_PLAN.features,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-        stripeSubscriptionId: subscription.id, // Update in case queried by customer ID
+        stripeSubscriptionId: subscription.id,
     });
 }
 
@@ -113,41 +111,12 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
     }
 
     const doc = snapshot.docs[0];
-    const { planType, features } = getPlanDetails('free');
 
     await doc.ref.update({
-        planType: 'Free',
+        planType: FREE_PLAN.planType,
         status: 'canceled',
         currentPeriodEnd: admin.firestore.Timestamp.fromMillis((subscription as any).current_period_end * 1000),
-        features,
+        features: FREE_PLAN.features,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
-}
-
-function getPlanDetails(priceId: string) {
-    switch (priceId) {
-        case process.env.NEXT_PUBLIC_STRIPE_ENTERPRISE_PRICE_ID:
-        case 'price_enterprise':
-            return {
-                planType: 'Enterprise',
-                features: { humanizeLimit: -1, bypassesLimit: -1, forensicAnalysis: true }
-            };
-        case process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID:
-        case 'price_pro':
-            return {
-                planType: 'Pro',
-                features: { humanizeLimit: 50, bypassesLimit: 100, forensicAnalysis: false }
-            };
-        case process.env.NEXT_PUBLIC_STRIPE_CERTIFICATE_PRICE_ID:
-        case 'price_cert':
-            return {
-                planType: 'Certificate',
-                features: { humanizeLimit: -1, bypassesLimit: -1, forensicAnalysis: true }
-            };
-        default:
-            return {
-                planType: 'Free',
-                features: { humanizeLimit: 5, bypassesLimit: 10, forensicAnalysis: false }
-            };
-    }
 }
