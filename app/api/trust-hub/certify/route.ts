@@ -10,6 +10,15 @@ import { storeCertificate, generateUniqueCertificateId } from "@/lib/trust-hub/s
 export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
+    // Guard: Firebase Admin env vars must be present
+    if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !process.env.FIREBASE_PRIVATE_KEY) {
+        console.error("Certification error: Missing Firebase Admin environment variables");
+        return NextResponse.json(
+            { error: "Server configuration error: Firebase credentials are not set." },
+            { status: 500 }
+        );
+    }
+
     try {
         const { content, metadata } = await req.json();
 
@@ -40,7 +49,7 @@ export async function POST(req: NextRequest) {
         const certificateId = await generateUniqueCertificateId();
         const verificationUrl = generateVerificationUrl(certificateId);
 
-        // Store verification data
+        // Store verification data in Firestore
         await storeCertificate({
             certificateId,
             textHash: result.contentHash,
@@ -57,9 +66,10 @@ export async function POST(req: NextRequest) {
             verificationUrl
         });
     } catch (error) {
-        console.error("Certification error:", error);
+        const message = error instanceof Error ? error.message : "Unknown error";
+        console.error("Certification error:", message);
         return NextResponse.json(
-            { error: "Failed to generate certificate" },
+            { error: `Failed to generate certificate: ${message}` },
             { status: 500 }
         );
     }
