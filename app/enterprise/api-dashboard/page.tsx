@@ -21,7 +21,6 @@ import {
 } from "@/lib/enterprise/api-manager";
 
 import { useFreeTier } from "@/hooks/use-free-tier";
-import { PRICING, UserTier } from "@/lib/usage-limits";
 import UpgradeModal from "@/components/UpgradeModal";
 
 export default function APIDashboardPage() {
@@ -167,14 +166,7 @@ export default function APIDashboardPage() {
                 isOpen={showUpgradeModal}
                 onClose={() => setShowUpgradeModal(false)}
                 message={upgradeMessage}
-                customPrice={PRICING[UserTier.ENTERPRISE]}
-                planName="Enterprise Plan"
-                features={[
-                    "Custom Voice Clones",
-                    "Brand Guardrails API",
-                    "API Dashboard Access",
-                    "High-Volume Content Processing"
-                ]}
+                planTier="enterprise"
             />
 
             {/* Header */}
