@@ -1,0 +1,23 @@
+Fetching recent checkout sessions...
+Session: cs_test_a1m7b4k0ELAbAhF7AD7yHCJJAcuBNbXJeGJQbrNZk5nA47gxjYq81xfnRD - Status: open - Payment Status: unpaid
+  No subscription created.
+Session: cs_test_a1iRePEgZOCIqkYAKQyPA5Th8SmZg6XmMlFZvF0HSP9wvZuBCbvVYrOxap - Status: complete - Payment Status: paid
+  Subscription: sub_1T7wInAlFhFcAwV0jxeX3VMg - Status: active
+  Price ID: price_1T7B06AlFhFcAwV0sAXA4acL
+  Matches Certificate? false (env: price_1T7AzBAlFhFcAwV0kUkjex68)
+  Matches Pro? true (env: price_1T7B06AlFhFcAwV0sAXA4acL)
+Session: cs_test_a1MoCXtTDP9bsxasd8vnffUTd5SIfujVqaOj9J3IV0cWo2PGaS04ykJ5KL - Status: complete - Payment Status: paid
+  Subscription: sub_1T7w86AlFhFcAwV05glabH55 - Status: active
+  Price ID: price_1T7B06AlFhFcAwV0sAXA4acL
+  Matches Certificate? false (env: price_1T7AzBAlFhFcAwV0kUkjex68)
+  Matches Pro? true (env: price_1T7B06AlFhFcAwV0sAXA4acL)
+Session: cs_test_a1rBndYf6xa5USg658YSLwCUaLUEi5uiKd8wuLJRLBHE6ts0Ul0I2KiC8c - Status: complete - Payment Status: paid
+  Subscription: sub_1T7vslAlFhFcAwV09jrUeIZW - Status: active
+  Price ID: price_1T7B06AlFhFcAwV0sAXA4acL
+  Matches Certificate? false (env: price_1T7AzBAlFhFcAwV0kUkjex68)
+  Matches Pro? true (env: price_1T7B06AlFhFcAwV0sAXA4acL)
+Session: cs_test_a1zD2LqBqOdj8fVtAVng3lSxum5okqyBRqZKIT5MOJNKQlfPaFxg80zrb6 - Status: complete - Payment Status: paid
+  Subscription: sub_1T7vhGAlFhFcAwV0p8AOrONm - Status: active
+  Price ID: price_1T7B06AlFhFcAwV0sAXA4acL
+  Matches Certificate? false (env: price_1T7AzBAlFhFcAwV0kUkjex68)
+  Matches Pro? true (env: price_1T7B06AlFhFcAwV0sAXA4acL)

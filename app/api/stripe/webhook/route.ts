@@ -48,52 +48,67 @@ export async function POST(req: Request) {
 async function handleSubscriptionCreated(session: Stripe.Checkout.Session) {
     const uid = session.client_reference_id || session.metadata?.uid;
     if (!uid) {
-        console.error('No UID found in checkout session');
+        console.error('No UID found in checkout session - skipping webhook');
         return;
     }
 
     const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
     const priceId = subscription.items.data[0].price.id;
 
-    const { planType, features } = getPlanDetails(priceId);
+    const isActive = subscription.status === 'active' || subscription.status === 'trialing';
+    const details = getPlanDetails(priceId);
+    const freeDetails = getPlanDetails('free');
 
     // Storing under users/{uid}/subscription/current to match plan requirements and support easy fetching
     await adminDb.collection('users').doc(uid).collection('subscription').doc('current').set({
         stripeCustomerId: session.customer,
         stripeSubscriptionId: subscription.id,
-        planType,
+        planType: isActive ? details.planType : 'Free',
         status: subscription.status,
         currentPeriodEnd: admin.firestore.Timestamp.fromMillis((subscription as any).current_period_end * 1000),
-        features,
+        features: isActive ? details.features : freeDetails.features,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     }, { merge: true });
 }
 
 async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
-    const snapshot = await adminDb.collectionGroup('subscription').where('stripeSubscriptionId', '==', subscription.id).get();
+    let snapshot = await adminDb.collectionGroup('subscription').where('stripeSubscriptionId', '==', subscription.id).get();
+
+    if (snapshot.empty && subscription.customer) {
+        snapshot = await adminDb.collectionGroup('subscription').where('stripeCustomerId', '==', subscription.customer).get();
+    }
 
     if (snapshot.empty) {
-        console.error(`No user found for subscription ${subscription.id}`);
+        console.error(`No user found for subscription ${subscription.id} - skipping webhook`);
         return;
     }
 
     const doc = snapshot.docs[0];
     const priceId = subscription.items.data[0].price.id;
-    const { planType, features } = getPlanDetails(priceId);
+
+    const isActive = subscription.status === 'active' || subscription.status === 'trialing';
+    const details = getPlanDetails(priceId);
+    const freeDetails = getPlanDetails('free');
 
     await doc.ref.update({
-        planType,
+        planType: isActive ? details.planType : 'Free',
         status: subscription.status,
         currentPeriodEnd: admin.firestore.Timestamp.fromMillis((subscription as any).current_period_end * 1000),
-        features,
+        features: isActive ? details.features : freeDetails.features,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        stripeSubscriptionId: subscription.id, // Update in case queried by customer ID
     });
 }
 
 async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
-    const snapshot = await adminDb.collectionGroup('subscription').where('stripeSubscriptionId', '==', subscription.id).get();
+    let snapshot = await adminDb.collectionGroup('subscription').where('stripeSubscriptionId', '==', subscription.id).get();
+
+    if (snapshot.empty && subscription.customer) {
+        snapshot = await adminDb.collectionGroup('subscription').where('stripeCustomerId', '==', subscription.customer).get();
+    }
 
     if (snapshot.empty) {
+        console.log(`No user found for deleted subscription ${subscription.id} - skipping webhook`);
         return;
     }
 
