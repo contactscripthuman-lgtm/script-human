@@ -1,9 +1,11 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Lock, ArrowRight, X, ShieldCheck, Zap, Building2 } from "lucide-react";
+import { Lock, ArrowRight, X, ShieldCheck, Zap, Building2, LayoutList } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 import { useAuth } from "@/components/AuthProvider";
+
 
 // ── Plan configuration ────────────────────────────────────────────────────────
 const PLAN_CONFIG = {
@@ -145,6 +147,16 @@ export default function UpgradeModal({
                         <p className="text-xs text-gray-400 dark:text-gray-600 mt-4">
                             Billed monthly · Cancel anytime
                         </p>
+
+                        {/* Compare plans link */}
+                        <Link
+                            href="/#pricing"
+                            onClick={onClose}
+                            className="inline-flex items-center justify-center gap-1.5 mt-3 text-xs text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors underline underline-offset-2"
+                        >
+                            <LayoutList size={12} />
+                            See and Compare Plans
+                        </Link>
                     </motion.div>
                 </motion.div>
             )}
