@@ -71,7 +71,13 @@ export default function UpgradeModal({
     const PlanIcon = plan.icon;
 
     const handleUpgrade = async () => {
-        if (!user) return;
+        // If not logged in → send to login page, then return here to complete checkout
+        if (!user) {
+            const returnUrl = encodeURIComponent(window.location.pathname);
+            window.location.href = `/login?redirect=${returnUrl}&priceId=${encodeURIComponent(plan.priceId)}`;
+            return;
+        }
+
         setLoading(true);
         try {
             const res = await fetch('/api/stripe/checkout', {
@@ -80,10 +86,14 @@ export default function UpgradeModal({
                 body: JSON.stringify({ priceId: plan.priceId, uid: user.uid }),
             });
             const data = await res.json();
-            if (data.url) window.location.href = data.url;
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                console.error('No checkout URL returned:', data);
+                setLoading(false);
+            }
         } catch (error) {
-            console.error("Checkout error:", error);
-        } finally {
+            console.error('Checkout error:', error);
             setLoading(false);
         }
     };
@@ -136,10 +146,16 @@ export default function UpgradeModal({
                         {/* CTA */}
                         <button
                             onClick={handleUpgrade}
-                            disabled={loading || !user}
-                            className="w-full group flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-[0.98] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-orange-500/30 disabled:opacity-60"
+                            disabled={loading}
+                            className="w-full group flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-[0.98] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-orange-500/30 disabled:opacity-60 disabled:cursor-not-allowed"
                         >
-                            <span>{loading ? "Redirecting..." : `Unlock ${plan.badge}`}</span>
+                            <span>
+                                {loading
+                                    ? "Redirecting..."
+                                    : !user
+                                        ? `Sign in to Unlock ${plan.badge}`
+                                        : `Unlock ${plan.badge}`}
+                            </span>
                             {!loading && <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />}
                         </button>
 
