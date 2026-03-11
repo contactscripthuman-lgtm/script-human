@@ -15,50 +15,12 @@ interface CertificateData {
 
 export default function EmbedSealPage() {
     const params = useParams();
-    const id = params.id as string;
-    const [data, setData] = useState<CertificateData | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const id = params?.id as string;
 
-    useEffect(() => {
-        // In a real implementation, you would fetch this data from your API
-        // For now, we simulate a successful fetch if the ID exists
-        // You might want to actually call /api/trust-hub/certify?id={id} if you have that endpoint
-        if (id) {
-            // Simulating API call delay
-            setTimeout(() => {
-                // Mock data - in production, replace with real fetch
-                setData({
-                    id: id,
-                    score: 98.5, // You'd ideally fetch the real score
-                    wordCount: 1250,
-                    timestamp: new Date().toISOString(),
-                    verified: true
-                });
-                setLoading(false);
-            }, 500);
-        } else {
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-            setError(true);
-            setLoading(false);
-        }
-    }, [id]);
-
-    if (loading) {
+    if (!id) {
         return (
             <div className="flex items-center justify-center h-full min-h-[100px] bg-white rounded-lg border border-gray-100">
                 <Loader2 size={24} className="animate-spin text-emerald-500" />
-            </div>
-        );
-    }
-
-    if (error || !data) {
-        return (
-            <div className="flex items-center justify-center h-full min-h-[100px] bg-gray-50 rounded-lg border border-gray-200">
-                <div className="flex items-center gap-2 text-gray-400 dark:text-white text-xs font-bold uppercase">
-                    <AlertTriangle size={14} />
-                    Invalid Certificate
-                </div>
             </div>
         );
     }
