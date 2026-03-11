@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState} from"react";
-import { ShieldCheck, Loader2, AlertTriangle, ExternalLink} from"lucide-react";
-import Link from"next/link";
-import { useParams} from"next/navigation";
+import { useEffect, useState } from "react";
+import { ShieldCheck, Loader2, AlertTriangle, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
 interface CertificateData {
     id: string;
@@ -34,15 +34,15 @@ export default function EmbedSealPage() {
                     wordCount: 1250,
                     timestamp: new Date().toISOString(),
                     verified: true
-               });
+                });
                 setLoading(false);
-           }, 500);
-       } else {
+            }, 500);
+        } else {
             // eslint-disable-next-line react-hooks/exhaustive-deps
             setError(true);
             setLoading(false);
-       }
-   }, [id]);
+        }
+    }, [id]);
 
     if (loading) {
         return (
@@ -50,7 +50,7 @@ export default function EmbedSealPage() {
                 <Loader2 size={24} className="animate-spin text-emerald-500" />
             </div>
         );
-   }
+    }
 
     if (error || !data) {
         return (
@@ -61,11 +61,11 @@ export default function EmbedSealPage() {
                 </div>
             </div>
         );
-   }
+    }
 
     return (
         <a
-            href={`https://scripthuman.com/verify/${id}`}
+            href={`${typeof window !== 'undefined' ? window.location.origin : 'https://scripthuman.com'}/verify/${id}`}
             target="_blank"
             rel="noopener noreferrer"
             className="group block"
