@@ -76,6 +76,27 @@ export default function HowToUsePage() {
                             </ol>
                         </div>
 
+                        <div className="bg-indigo-50 dark:bg-indigo-900/10 rounded-2xl p-8 border border-indigo-100 dark:border-indigo-800/30 shadow-sm mb-8">
+                            <h3 className="text-xl font-bold text-indigo-950 dark:text-indigo-100 mb-4 flex items-center gap-2">
+                                <ShieldCheck size={20} className="text-indigo-500" />
+                                Strong Considerations for Better Results
+                            </h3>
+                            <ul className="space-y-4 text-indigo-900 dark:text-indigo-200 text-base list-disc list-inside marker:text-indigo-400">
+                                <li>
+                                    <strong>Manual Proofreading:</strong> Recheck spellings and grammar manually after the text is humanized.
+                                </li>
+                                <li>
+                                    <strong>Avoid Checkers:</strong> Do <strong className="underline decoration-indigo-300 underline-offset-2">not</strong> use external grammar or spelling checker tools on the output. They will alter the deliberate human variations and spoil your humanized content.
+                                </li>
+                                <li>
+                                    <strong>Iterate freely:</strong> You can generate the text again and again until the Trust Hub verified score corresponds to your needs.
+                                </li>
+                                <li>
+                                    <strong>Logical Foundation:</strong> Our web tool does not rely simply on AI to fight AI. It functions precisely based on a strong logical algorithm crafted to mirror human typing patterns.
+                                </li>
+                            </ul>
+                        </div>
+
                         <div className="flex justify-start">
                             <Link href="/writing-room" className="inline-flex items-center gap-2 font-bold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300">
                                 Open Writing Room <ArrowRight size={16} />
