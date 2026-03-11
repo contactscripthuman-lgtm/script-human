@@ -21,6 +21,33 @@ export default function AccountPage() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+    const [isManagingSub, setIsManagingSub] = useState(false);
+
+    const handleManageSubscription = async () => {
+        if (!user) return;
+        setIsManagingSub(true);
+        try {
+            const response = await fetch('/api/stripe/create-portal-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ uid: user.uid }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.url) {
+                window.location.href = data.url;
+            } else {
+                console.error('Failed to create portal session:', data.error);
+                alert(data.error || 'Could not open subscription portal. (Hint: Only active stripe subscriptions have a portal)');
+            }
+        } catch (error) {
+            console.error('Error opening portal:', error);
+            alert('Could not open subscription portal. Please try again.');
+        } finally {
+            setIsManagingSub(false);
+        }
+    };
 
     const handlePasswordUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -119,10 +146,18 @@ export default function AccountPage() {
                                         )}
                                     </div>
 
-                                    {!isPremium && (
+                                    {!isPremium ? (
                                         <Link href="/#pricing" className="block w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-center rounded-lg text-sm font-bold transition-colors shadow-lg shadow-indigo-200">
                                             Upgrade Plan
                                         </Link>
+                                    ) : (
+                                        <button
+                                            onClick={handleManageSubscription}
+                                            disabled={isManagingSub}
+                                            className="block w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-center rounded-lg text-sm font-bold transition-colors shadow-lg shadow-indigo-200 disabled:opacity-50"
+                                        >
+                                            {isManagingSub ? 'Opening Portal...' : 'Manage Subscription'}
+                                        </button>
                                     )}
                                 </div>
                             </div>
