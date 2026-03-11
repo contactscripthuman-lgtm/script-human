@@ -119,7 +119,8 @@ export default function WritingRoom() {
         // Free tier 1000 word daily limit enforcement
         if (!isPremium && (wordsUsed + wordCount > wordsLimit)) {
             const remaining = Math.max(0, wordsLimit - wordsUsed);
-            alert(`Daily word limit reached! You have ${remaining} words remaining today.\n\nResets in: ${timeUntilReset.hours}h ${timeUntilReset.minutes}m`);
+            setUpgradeMessage(`Daily word limit reached! You have ${remaining} words remaining today. Resets in: ${timeUntilReset.hours}h ${timeUntilReset.minutes}m. Experience unlimited word count, get Pro plan!`);
+            setShowUpgradeModal(true);
             return;
         }
 
