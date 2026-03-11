@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
-import { adminDb, admin } from '@/lib/firebase-admin';
+import { adminDb, admin, adminAuth } from '@/lib/firebase-admin';
 import { getPlanDetails, FREE_PLAN } from '@/lib/stripe-plans';
 import Stripe from 'stripe';
+import { sendUpgradeEmail, sendDowngradeEmail } from '@/lib/email';
 
 export async function POST(req: Request) {
     const rawBody = await req.text();
@@ -68,6 +69,17 @@ async function handleSubscriptionCreated(session: Stripe.Checkout.Session) {
         features: isActive ? details.features : FREE_PLAN.features,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     }, { merge: true });
+
+    if (isActive) {
+        try {
+            const userRecord = await adminAuth.getUser(uid);
+            if (userRecord.email) {
+                await sendUpgradeEmail(userRecord.email, userRecord.displayName || 'subscriber', details.planType);
+            }
+        } catch (error) {
+            console.error('Error fetching user email for upgrade notification:', error);
+        }
+    }
 }
 
 async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
@@ -115,8 +127,19 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
     await doc.ref.update({
         planType: FREE_PLAN.planType,
         status: 'canceled',
-        currentPeriodEnd: admin.firestore.Timestamp.fromMillis((subscription as any).current_period_end * 1000),
         features: FREE_PLAN.features,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
+
+    const uid = doc.ref.parent.parent?.id;
+    if (uid) {
+        try {
+            const userRecord = await adminAuth.getUser(uid);
+            if (userRecord.email) {
+                await sendDowngradeEmail(userRecord.email, userRecord.displayName || 'subscriber');
+            }
+        } catch (error) {
+            console.error('Error fetching user for downgrade email:', error);
+        }
+    }
 }
