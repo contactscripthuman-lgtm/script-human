@@ -4,7 +4,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { PenTool, Palette, Building2, ShieldCheck, BookOpen, Menu, X, User } from "lucide-react";
+import { PenTool, Palette, Building2, ShieldCheck, BookOpen, Menu, X, User, FileText } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 export default function ToolNavbar() {
@@ -64,6 +64,10 @@ export default function ToolNavbar() {
                     <BookOpen size={14} />
                     How To Use
                 </Link>
+                <Link href="/documentation" className="flex items-center gap-2 px-4 py-2 text-gray-500 hover:text-gray-900 font-medium text-xs uppercase tracking-wider font-display transition-colors rounded-full hover:bg-gray-100/50">
+                    <FileText size={14} />
+                    DOCS
+                </Link>
             </div>
 
             {/* Mobile Hamburger */}
@@ -104,6 +108,11 @@ export default function ToolNavbar() {
                     <Link href="/how-to-use" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 text-gray-500 mt-4">
                         <BookOpen size={20} />
                         <span className="font-bold text-sm uppercase tracking-wide">How To Use</span>
+                    </Link>
+
+                    <Link href="/documentation" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 text-gray-500">
+                        <FileText size={20} />
+                        <span className="font-bold text-sm uppercase tracking-wide">DOCS</span>
                     </Link>
                 </div>
             )}
