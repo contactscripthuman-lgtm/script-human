@@ -1,26 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { Settings, CreditCard, Shield, ChevronDown, Check, AlertCircle } from "lucide-react";
+import { CreditCard, Check } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 
 import { useUsageLimits } from "@/hooks/useUsageLimits";
 import { useAuth } from "@/components/AuthProvider";
 import { useFreeTier } from "@/hooks/use-free-tier";
-import { updatePassword } from "firebase/auth";
 
 export default function AccountPage() {
     const { wordsUsed, wordsLimit, timeUntilReset } = useUsageLimits();
     const { user } = useAuth();
     const { currentTier, isPremium } = useFreeTier();
 
-    // Security Section State
-    const [isSecurityOpen, setIsSecurityOpen] = useState(false);
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
     const [isManagingSub, setIsManagingSub] = useState(false);
     const [isDownloadingInvoice, setIsDownloadingInvoice] = useState(false);
 
@@ -75,41 +69,7 @@ export default function AccountPage() {
         }
     };
 
-    const handlePasswordUpdate = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setMessage(null);
 
-        if (!user) {
-            setMessage({ type: 'error', text: "You must be logged in to update your password." });
-            setLoading(false);
-            return;
-        }
-
-        if (newPassword !== confirmPassword) {
-            setMessage({ type: 'error', text: "New passwords do not match." });
-            setLoading(false);
-            return;
-        }
-
-        try {
-            await updatePassword(user, newPassword);
-            setMessage({ type: 'success', text: "Password updated successfully!" });
-            setNewPassword("");
-            setConfirmPassword("");
-            setLoading(false);
-        } catch (error: any) {
-            console.error("Password update error:", error);
-            let errorMessage = "Failed to update password. Please try again.";
-            if (error.code === 'auth/requires-recent-login') {
-                errorMessage = "For security reasons, please log out and log back in before updating your password.";
-            } else if (error.message) {
-                errorMessage = error.message;
-            }
-            setMessage({ type: 'error', text: errorMessage });
-            setLoading(false);
-        }
-    };
 
     return (
         <div className="min-h-screen bg-gray-50 font-[family-name:var(--font-metro)]">
@@ -198,90 +158,6 @@ export default function AccountPage() {
                             </div>
 
 
-                        </div>
-                    </section>
-
-                    {/* 2. Account Settings Section */}
-                    <section className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                        <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
-                            <h3 className="font-bold text-gray-700 dark:text-white flex items-center gap-2">
-                                <Settings size={18} className="text-gray-500 dark:text-white" /> Account Settings
-                            </h3>
-                        </div>
-                        <div className="divide-y divide-gray-50">
-
-
-                            {/* Expandable Security Section */}
-                            <div className="flex flex-col transition-all duration-300">
-                                <button
-                                    onClick={() => setIsSecurityOpen(!isSecurityOpen)}
-                                    className="flex items-center justify-between p-6 hover:bg-gray-50 transition-colors group w-full text-left"
-                                >
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${isSecurityOpen ? 'bg-emerald-50 text-emerald-600' : 'bg-gray-100 text-gray-600 dark:text-white group-hover:bg-gray-200 group-hover:text-gray-900'}`}>
-                                            <Shield size={20} />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-gray-900 dark:text-white">Security & Password</h4>
-                                            <p className="text-sm text-gray-500 dark:text-white">Update your password</p>
-                                        </div>
-                                    </div>
-                                    <div className={`transition-transform duration-300 ${isSecurityOpen ? 'rotate-180' : ''}`}>
-                                        <ChevronDown size={20} className="text-gray-300 dark:text-white group-hover:text-gray-500" />
-                                    </div>
-                                </button>
-
-                                {/* Dropdown Content */}
-                                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isSecurityOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                                    <div className="p-6 pt-0 bg-gray-50/30 border-t border-gray-50">
-                                        <div className="mt-6 max-w-md">
-                                            {message && (
-                                                <div className={`p-4 rounded-xl mb-6 flex items-start gap-3 ${message.type === 'success' ? 'bg-green-50 text-green-700 border border-green-100' : 'bg-red-50 text-red-700 border border-red-100'
-                                                    }`}>
-                                                    {message.type === 'success' ? <Check size={18} className="mt-0.5" /> : <AlertCircle size={18} className="mt-0.5" />}
-                                                    <p className="text-sm font-medium">{message.text}</p>
-                                                </div>
-                                            )}
-
-                                            <form onSubmit={handlePasswordUpdate} className="space-y-5">
-                                                <div>
-                                                    <label className="block text-sm font-bold text-gray-700 dark:text-white mb-1.5">New Password</label>
-                                                    <input
-                                                        type="password"
-                                                        value={newPassword}
-                                                        onChange={(e) => setNewPassword(e.target.value)}
-                                                        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all bg-white"
-                                                        placeholder="Enter new password"
-                                                        required
-                                                        minLength={6}
-                                                    />
-                                                </div>
-
-                                                <div>
-                                                    <label className="block text-sm font-bold text-gray-700 dark:text-white mb-1.5">Confirm New Password</label>
-                                                    <input
-                                                        type="password"
-                                                        value={confirmPassword}
-                                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                                        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all bg-white"
-                                                        placeholder="Confirm new password"
-                                                        required
-                                                        minLength={6}
-                                                    />
-                                                </div>
-
-                                                <button
-                                                    type="submit"
-                                                    disabled={loading}
-                                                    className="px-6 py-2.5 bg-gray-900 text-white font-bold rounded-xl hover:bg-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                                                >
-                                                    {loading ? 'Updating...' : 'Update Password'}
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </section>
                 </div>
