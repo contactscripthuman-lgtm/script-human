@@ -149,8 +149,6 @@ export default function HowToUsePage() {
                 </section>
 
             </main>
-
-            <Footer />
         </div>
     );
 }
