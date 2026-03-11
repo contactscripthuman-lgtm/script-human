@@ -1,5 +1,5 @@
-import Link from"next/link";
-import Image from"next/image";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
     return (
@@ -26,6 +26,7 @@ export default function Footer() {
                     {/* Row 1: Main Links */}
                     <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-medium text-gray-600 dark:text-white">
                         <Link href="/writing-room" className="hover:text-secondary-600 transition-colors">Tools</Link>
+                        <Link href="/how-to-use" className="hover:text-secondary-600 transition-colors">How To Use</Link>
                         <Link href="/blog" className="hover:text-secondary-600 transition-colors">Blog</Link>
                         <Link href="/about" className="hover:text-secondary-600 transition-colors">About Us</Link>
                         <Link href="/contact" className="hover:text-secondary-600 transition-colors">Contact Us</Link>

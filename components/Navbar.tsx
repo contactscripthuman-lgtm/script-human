@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, Moon, Sun, User, ChevronDown, LogOut, Settings, ShieldCheck, LayoutDashboard } from "lucide-react";
+import { Menu, X, Moon, Sun, User, ChevronDown, LogOut, Settings, ShieldCheck, LayoutDashboard, BookOpen } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/components/AuthProvider";
 import { signOut } from "firebase/auth";
@@ -52,6 +52,11 @@ export default function Navbar() {
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex gap-4 items-center">
+                        <Link href="/how-to-use" className="flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mr-2">
+                            <BookOpen size={16} />
+                            How To Use
+                        </Link>
+
                         {/* Dark Mode Toggle */}
                         <ThemeToggle />
 
@@ -113,6 +118,15 @@ export default function Navbar() {
                                         Get Started
                                     </Link>
                                 )}
+
+                                <Link
+                                    href="/how-to-use"
+                                    className="flex items-center gap-3 mt-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 transition"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    <BookOpen size={20} className="text-indigo-500" />
+                                    How To Use
+                                </Link>
 
                                 {/* Theme Toggle in Mobile Menu */}
                                 <div className="mt-4 flex items-center gap-3">
