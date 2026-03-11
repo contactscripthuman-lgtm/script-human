@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { ArrowRight, Loader2, Mail, CheckCircle, Smartphone, ShieldCheck, Zap, FileCheck } from "lucide-react";
 
@@ -15,7 +15,8 @@ export default function LoginPage() {
     const [error, setError] = useState<string | null>(null);
 
     const [requireVerification, setRequireVerification] = useState(false);
-
+    const [resetSent, setResetSent] = useState(false);
+    const [resetLoading, setResetLoading] = useState(false);
     const handleGoogleLogin = async () => {
         setLoading(true);
         setError(null);
@@ -66,6 +67,31 @@ export default function LoginPage() {
         } catch (error: any) {
             setError("Email or password is incorrect");
             setLoading(false);
+        }
+    };
+    const handleForgotPassword = async () => {
+        if (!email) {
+            setError("Please enter your email address to reset your password.");
+            return;
+        }
+
+        setResetLoading(true);
+        setError(null);
+        setResetSent(false);
+
+        try {
+            await sendPasswordResetEmail(auth, email);
+            setResetSent(true);
+            setResetLoading(false);
+        } catch (error: any) {
+            if (error.code === 'auth/user-not-found') {
+                setError("No account found with this email address.");
+            } else if (error.code === 'auth/invalid-email') {
+                setError("Please enter a valid email address.");
+            } else {
+                setError("Failed to send password reset email. Please try again.");
+            }
+            setResetLoading(false);
         }
     };
 
@@ -228,9 +254,23 @@ export default function LoginPage() {
                                     className="w-full px-4 py-3 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                                 />
                                 <div className="text-right mt-2">
-                                    <button type="button" className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300">Forgot password?</button>
+                                    <button 
+                                        type="button" 
+                                        onClick={handleForgotPassword}
+                                        disabled={resetLoading}
+                                        className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 disabled:opacity-50 transition-colors"
+                                    >
+                                        {resetLoading ? "Sending link..." : "Forgot password?"}
+                                    </button>
                                 </div>
                             </div>
+                            
+                            {resetSent && (
+                                <div className="p-4 rounded-xl bg-green-50 border border-green-100 text-green-700 text-sm font-medium flex items-center gap-3">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0" />
+                                    Password reset link sent to your email!
+                                </div>
+                            )}
 
                             {error && (
                                 <div className="p-4 rounded-xl bg-red-50 border border-red-100 text-red-600 text-sm font-medium flex items-center gap-3">
