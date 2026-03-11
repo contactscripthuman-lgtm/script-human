@@ -47,13 +47,20 @@ export async function storeCertificate(data: VerificationData): Promise<void> {
     await adminDb.collection("certificates").doc(data.certificateId).set(data);
 }
 
-/**
- * Retrieve certificate for verification
- */
 export async function getCertificate(certificateId: string): Promise<VerificationData | null> {
     const docSnap = await adminDb.collection("certificates").doc(certificateId).get();
     if (docSnap.exists) {
         return docSnap.data() as VerificationData;
     }
     return null;
+}
+
+/**
+ * Store iframe embed code snippets for faster retrieval
+ */
+export async function storeEmbedCode(certificateId: string, embedCode: string): Promise<void> {
+    await adminDb.collection("embed_codes").doc(certificateId).set({
+        snippet: embedCode,
+        createdAt: new Date().toISOString()
+    });
 }

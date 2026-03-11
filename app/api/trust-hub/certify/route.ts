@@ -4,7 +4,7 @@ import type { ContentMetadata } from "@/lib/trust-hub/types";
 import {
     generateVerificationUrl
 } from "@/lib/trust-hub/pdf-generator";
-import { storeCertificate, generateUniqueCertificateId } from "@/lib/trust-hub/storage";
+import { storeCertificate, generateUniqueCertificateId, storeEmbedCode } from "@/lib/trust-hub/storage";
 
 // Using Node runtime for crypto compatibility
 export const runtime = "nodejs";
@@ -59,6 +59,11 @@ export async function POST(req: NextRequest) {
             layers: result.layers,
             metrics: result.metrics,
         });
+
+        // Store Embed Code snippet into Firebase simultaneously
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://scripthuman.com';
+        const embedCodeSnippet = `<iframe src="${baseUrl}/verify/${certificateId}/seal" width="280" height="100" frameborder="0" scrolling="no" style="border:none; overflow:hidden;"></iframe>`;
+        await storeEmbedCode(certificateId, embedCodeSnippet);
 
         // Return JSON with ID (Client will generate PDF)
         return NextResponse.json({
