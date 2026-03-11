@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Vercel build phase may not have the API key available, so we provide a fallback
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_fallback_key');
 
 // Fallback email for testing to avoid bounce restrictions
 const FROM_EMAIL = 'onboarding@resend.dev';
