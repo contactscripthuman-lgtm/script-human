@@ -13,12 +13,9 @@ export const metadata: Metadata = {
   description: "Transform AI-generated content into authentic human writing. Verify content authenticity with forensic analysis and media detection.",
 };
 
-import ChatBot from "@/components/ChatBot";
-import ComplianceOverlay from "@/components/ComplianceOverlay";
 import AuthProvider from "@/components/AuthProvider";
-import WelcomePopup from "@/components/WelcomePopup";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import Footer from "@/components/Footer";
+import GlobalOverlays from "@/components/GlobalOverlays";
 
 export default function RootLayout({
   children,
@@ -38,12 +35,9 @@ export default function RootLayout({
         >
           <AuthProvider>
             {children}
-            <WelcomePopup />
           </AuthProvider>
 
-          <ComplianceOverlay />
-          <ChatBot />
-          <Footer />
+          <GlobalOverlays />
         </ThemeProvider>
       </body>
     </html>

@@ -68,23 +68,25 @@ export default function EmbedSealPage() {
             href={`${typeof window !== 'undefined' ? window.location.origin : 'https://scripthuman.com'}/verify/${id}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="group block"
+            className="group block w-full h-full"
+            style={{ textDecoration: 'none' }}
         >
-            <div className="flex items-center gap-4 bg-white p-3 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer max-w-[300px]">
+            <div className="flex items-center gap-3 bg-white p-3 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer h-full box-border">
                 {/* Shield Icon */}
-                <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center shrink-0 border border-emerald-100 group-hover:scale-105 transition-transform">
-                    <ShieldCheck size={24} className="text-emerald-500" />
+                <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center shrink-0 border border-emerald-100 group-hover:scale-105 transition-transform">
+                    <ShieldCheck size={20} className="text-emerald-500" />
                 </div>
 
                 {/* Text Info */}
-                <div className="flex flex-col">
-                    <div className="text-[10px] font-bold text-gray-400 dark:text-white uppercase tracking-wider mb-0.5 flex items-center gap-1">
-                        Script Human Verified
-                        <ExternalLink size={10} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="flex flex-col flex-1 overflow-hidden font-sans">
+                    <div className="text-[12px] font-bold text-gray-900 uppercase tracking-wider mb-1">
+                        Script Human Verified Badge
                     </div>
-                    <div className="flex items-baseline gap-2">
-                        <span className="text-xl font-black text-gray-900 dark:text-white">{data.score}%</span>
-                        <span className="text-xs font-bold text-emerald-600">HUMAN</span>
+                    <div className="text-[10px] text-gray-500 leading-tight">
+                        Content is verified by ScriptHuman engine
+                    </div>
+                    <div className="text-[9px] font-bold text-emerald-600 mt-1 truncate font-mono bg-emerald-50 px-1 py-0.5 rounded w-fit">
+                        ID: {id}
                     </div>
                 </div>
             </div>
