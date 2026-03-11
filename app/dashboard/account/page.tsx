@@ -22,6 +22,32 @@ export default function AccountPage() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
     const [isManagingSub, setIsManagingSub] = useState(false);
+    const [isDownloadingInvoice, setIsDownloadingInvoice] = useState(false);
+
+    const handleDownloadInvoice = async () => {
+        if (!user) return;
+        setIsDownloadingInvoice(true);
+        try {
+            const response = await fetch('/api/stripe/invoices', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ uid: user.uid }),
+            });
+            const data = await response.json();
+
+            if (response.ok && data.url) {
+                window.open(data.url, '_blank');
+            } else {
+                console.error('Failed to fetch invoice:', data.error);
+                alert(data.error || 'Could not download invoice. (Hint: Only active stripe subscriptions have invoices)');
+            }
+        } catch (error) {
+            console.error('Error downloading invoice:', error);
+            alert('Could not download invoice. Please try again.');
+        } finally {
+            setIsDownloadingInvoice(false);
+        }
+    };
 
     const handleManageSubscription = async () => {
         if (!user) return;
@@ -151,13 +177,22 @@ export default function AccountPage() {
                                             Upgrade Plan
                                         </Link>
                                     ) : (
-                                        <button
-                                            onClick={handleManageSubscription}
-                                            disabled={isManagingSub}
-                                            className="block w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-center rounded-lg text-sm font-bold transition-colors shadow-lg shadow-indigo-200 disabled:opacity-50"
-                                        >
-                                            {isManagingSub ? 'Opening Portal...' : 'Manage Subscription'}
-                                        </button>
+                                        <div className="space-y-3">
+                                            <button
+                                                onClick={handleManageSubscription}
+                                                disabled={isManagingSub || isDownloadingInvoice}
+                                                className="block w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-center rounded-lg text-sm font-bold transition-colors shadow-lg shadow-indigo-200 disabled:opacity-50"
+                                            >
+                                                {isManagingSub ? 'Opening Portal...' : 'Manage Subscription'}
+                                            </button>
+                                            <button
+                                                onClick={handleDownloadInvoice}
+                                                disabled={isDownloadingInvoice || isManagingSub}
+                                                className="block w-full py-2.5 px-4 bg-white/80 hover:bg-white text-indigo-700 border border-indigo-200 text-center rounded-lg text-sm font-bold transition-colors shadow-sm disabled:opacity-50"
+                                            >
+                                                {isDownloadingInvoice ? 'Fetching Invoice...' : 'Download Latest Invoice'}
+                                            </button>
+                                        </div>
                                     )}
                                 </div>
                             </div>
