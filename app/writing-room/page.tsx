@@ -414,7 +414,15 @@ export default function WritingRoom() {
                                         <AlertTriangle className="text-amber-500 shrink-0 mt-0.5" size={20} />
                                         <div className="text-sm text-amber-900 font-[var(--font-metro)]">
                                             <span className="font-bold block mb-1">Important Note</span>
-                                            Please check grammar and spellings again. But don't use grammar checker and spelling checker tools as they will spoil your content humanization.
+                                            <p className="mb-2">
+                                                <strong>Please check grammar and spellings again.</strong> To ensure your content successfully bypasses AI detection, our tool occasionally introduces natural, human-like variations that may appear as minor grammatical quirks. This is an intentional feature designed to give your text an authentic human touch!
+                                            </p>
+                                            <p className="mb-2">
+                                                We recommend reviewing and manually correcting any minor errors. <strong>Please avoid using automated grammar checkers, as they often reintroduce robotic patterns and spoil the humanization.</strong>
+                                            </p>
+                                            <p>
+                                                <em>Tip:</em> If your humanized content scores below 75% in the Trust Hub, simply paste the result back into our humanizer here and run it again to further refine the text.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
