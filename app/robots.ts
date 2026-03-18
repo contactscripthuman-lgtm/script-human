@@ -6,8 +6,8 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent:"*",
             allow:"/",
-            disallow: ["/api/","/dashboard/","/verify/"],
+            disallow: ["/private/", "/api/", "/dashboard/", "/verify/"],
        },
-        sitemap:"https://scripthuman.ai/sitemap.xml",
+        sitemap:"https://www.scripthuman.com/sitemap.xml",
    };
 }
