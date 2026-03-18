@@ -19,6 +19,7 @@ export default function ToolNavbar() {
     const inactiveClass = "text-gray-500 hover:text-gray-900 dark:text-gray-900 hover:bg-white/50";
 
     return (
+        <>
         <nav className="p-4 bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50 flex items-center justify-between md:justify-center">
 
             {/* Left Logo - Absolute on Desktop, Relative on Mobile */}
@@ -32,7 +33,7 @@ export default function ToolNavbar() {
             </div>
 
             {/* Center Pills - Desktop Only */}
-            <div className="hidden md:flex max-w-fit mx-auto bg-gray-100/50 p-1.5 rounded-full gap-1">
+            <div className="hidden lg:flex max-w-fit mx-auto bg-gray-100/50 p-1.5 rounded-full gap-1">
                 <Link href="/writing-room" className={`${linkBaseClass} ${isActive('/writing-room') ? activeClass : inactiveClass}`}>
                     <PenTool size={14} />
                     Writing Room
@@ -55,7 +56,7 @@ export default function ToolNavbar() {
             </div>
 
             {/* Right Actions - Desktop Only */}
-            <div className="hidden md:flex absolute right-6 items-center gap-3">
+            <div className="hidden lg:flex absolute right-6 items-center gap-3">
                 <Link href="/dashboard/account" className="flex items-center gap-2 px-4 py-2 text-gray-500 hover:text-gray-900 font-medium text-xs uppercase tracking-wider font-display transition-colors rounded-full hover:bg-gray-100/50">
                     <User size={14} />
                     My Account
@@ -72,15 +73,16 @@ export default function ToolNavbar() {
 
             {/* Mobile Hamburger */}
             <button
-                className="md:hidden p-2 text-gray-900"
+                className="lg:hidden p-2 text-gray-900"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
                 {isMenuOpen ? <X /> : <Menu />}
             </button>
+        </nav>
 
             {/* Mobile Menu Overlay */}
             {isMenuOpen && (
-                <div className="fixed inset-0 top-[73px] bg-white/95 backdrop-blur-md z-40 flex flex-col p-6 gap-4 md:hidden animate-in fade-in slide-in-from-top-10 duration-200 border-t border-gray-100">
+                <div className="fixed inset-0 top-[73px] bg-white/95 backdrop-blur-md z-[45] flex flex-col p-6 gap-4 lg:hidden animate-in fade-in slide-in-from-top-10 duration-200 border-t border-gray-100">
                     <Link href="/dashboard/account" className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 text-gray-900 font-medium">
                         <User size={18} />
                         My Account
@@ -116,6 +118,6 @@ export default function ToolNavbar() {
                     </Link>
                 </div>
             )}
-        </nav>
+        </>
     );
 }

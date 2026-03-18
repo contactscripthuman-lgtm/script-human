@@ -51,7 +51,7 @@ export default function Navbar() {
                     </div>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex gap-4 items-center">
+                    <div className="hidden lg:flex gap-4 items-center">
                         {/* Dark Mode Toggle */}
                         <ThemeToggle />
 
@@ -78,15 +78,17 @@ export default function Navbar() {
 
                     {/* Mobile Hamburger */}
                     <button
-                        className="md:hidden z-50 relative p-2 text-gray-900 dark:text-white"
+                        className="lg:hidden z-50 relative p-2 text-gray-900 dark:text-white"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                     >
                         {isMenuOpen ? <X /> : <Menu />}
                     </button>
+                </div>
+            </nav>
 
-                    {/* Mobile Menu Overlay */}
-                    {isMenuOpen && (
-                        <div className="fixed inset-0 bg-white/95 backdrop-blur-xl z-40 flex flex-col justify-center items-center gap-8 md:hidden animate-in fade-in slide-in-from-top-10 duration-200">
+            {/* Mobile Menu Overlay */}
+            {isMenuOpen && (
+                        <div className="fixed inset-0 bg-white/95 backdrop-blur-xl z-[45] flex flex-col pt-24 items-center gap-8 lg:hidden animate-in fade-in slide-in-from-top-10 duration-200">
                             <div className="flex flex-col items-center gap-6 text-center">
                                 <div className="bg-white/50 backdrop-blur-sm px-3 py-1.5 rounded-full border border-gray-200 flex items-center gap-2 mb-4">
                                     <div className="relative flex h-2 w-2">
@@ -121,9 +123,7 @@ export default function Navbar() {
                                 </div>
                             </div>
                         </div>
-                    )}
-                </div>
-            </nav>
+            )}
 
             {/* Right-Side Drawer for Account */}
             {isProfileOpen && (

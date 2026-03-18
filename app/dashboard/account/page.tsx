@@ -12,7 +12,7 @@ import { useFreeTier } from "@/hooks/use-free-tier";
 export default function AccountPage() {
     const { wordsUsed, wordsLimit, timeUntilReset } = useUsageLimits();
     const { user } = useAuth();
-    const { currentTier, isPremium } = useFreeTier();
+    const { currentTier, isPremium, hasActiveSubscription } = useFreeTier();
 
 
     const [isManagingSub, setIsManagingSub] = useState(false);
@@ -132,7 +132,7 @@ export default function AccountPage() {
                                         )}
                                     </div>
 
-                                    {!isPremium ? (
+                                    {!hasActiveSubscription ? (
                                         <Link href="/#pricing" className="block w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-center rounded-lg text-sm font-bold transition-colors shadow-lg shadow-indigo-200">
                                             Upgrade Plan
                                         </Link>

@@ -73,6 +73,7 @@ export function useFreeTier() {
     // Capability Checkers
     // Trust Hub (analysis) — Certificate, Pro, and Enterprise
     const hasTrustHubAccess = [UserTier.CERTIFICATE, UserTier.PRO, UserTier.ENTERPRISE].includes(currentTier);
+    const hasActiveSubscription = [UserTier.CERTIFICATE, UserTier.PRO, UserTier.ENTERPRISE].includes(currentTier);
     // Certificate download — Certificate and Enterprise only (Pro gets analysis but NOT download)
     const hasCertificateAccess = [UserTier.CERTIFICATE, UserTier.ENTERPRISE].includes(currentTier);
     const hasProAccess = [UserTier.PRO, UserTier.ENTERPRISE].includes(currentTier);
@@ -167,6 +168,7 @@ export function useFreeTier() {
         currentTier,
         setTier,
         isPremium: hasProAccess, // Backwards compatibility alias for simple checks
+        hasActiveSubscription,
         hasTrustHubAccess,
         hasCertificateAccess,
         hasProAccess,
