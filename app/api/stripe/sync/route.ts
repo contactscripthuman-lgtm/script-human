@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { adminDb, admin } from '@/lib/firebase-admin';
+import { adminDb, admin, adminAuth } from '@/lib/firebase-admin';
 import { stripe } from '@/lib/stripe';
 import { getPlanDetails, FREE_PLAN } from '@/lib/stripe-plans';
 import Stripe from 'stripe';
@@ -37,8 +37,37 @@ export async function POST(req: Request) {
             }
         }
 
+        // --- NEW: Sync User Profile Data to root `users/{uid}` ---
+        if (actualUid) {
+            try {
+                const userRecord = await adminAuth.getUser(actualUid);
+                await adminDb.collection('users').doc(actualUid).set({
+                    email: userRecord.email || null,
+                    displayName: userRecord.displayName || null,
+                    photoURL: userRecord.photoURL || null,
+                    lastSync: admin.firestore.FieldValue.serverTimestamp(),
+                }, { merge: true });
+            } catch (err: any) {
+                console.error('Failed to sync user profile to Firestore:', err);
+                // Non-fatal error, allow subscription sync to continue
+            }
+        }
+
         if (!stripeSubscriptionId || !actualUid) {
-            return NextResponse.json({ success: true, message: 'No Stripe subscription ID found in Firebase or Session.' });
+            // --- NEW: Ensure Free Tier Document Exists ---
+            if (actualUid) {
+                const subRef = adminDb.collection('users').doc(actualUid).collection('subscription').doc('current');
+                const subDoc = await subRef.get();
+                // Only enforce baseline if the field is missing/corrupted
+                if (!subDoc.exists || !subDoc.data()?.planType) {
+                    await subRef.set({
+                        planType: "free",
+                        features: FREE_PLAN.features,
+                        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+                    }, { merge: true });
+                }
+            }
+            return NextResponse.json({ success: true, message: 'No Stripe subscription ID found. Defaulted to free.' });
         }
 
         const subscriptionDocRef = adminDb.collection('users').doc(actualUid).collection('subscription').doc('current');
