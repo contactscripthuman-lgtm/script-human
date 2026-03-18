@@ -2,31 +2,32 @@
 import { MetadataRoute} from"next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl ="https://scripthuman.ai";
+    const baseUrl ="https://www.scripthuman.com";
 
     return [
         {
             url: baseUrl,
             lastModified: new Date(),
-            changeFrequency:"daily",
+            changeFrequency:"yearly",
             priority: 1,
        },
+       // Add other pages here, like your specific web tools
         {
             url:`${baseUrl}/writing-room`,
             lastModified: new Date(),
-            changeFrequency:"weekly",
+            changeFrequency:"monthly",
             priority: 0.8,
        },
         {
             url:`${baseUrl}/style-studio`,
             lastModified: new Date(),
-            changeFrequency:"weekly",
+            changeFrequency:"monthly",
             priority: 0.8,
        },
         {
             url:`${baseUrl}/trust-hub`,
             lastModified: new Date(),
-            changeFrequency:"daily",
+            changeFrequency:"weekly",
             priority: 0.9,
        },
         {
@@ -36,10 +37,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.7,
        },
         {
-            url:`${baseUrl}/documentation`,
+            url:`${baseUrl}/blog`,
             lastModified: new Date(),
             changeFrequency:"weekly",
-            priority: 0.6,
+            priority: 0.8,
        },
     ];
 }

@@ -11,6 +11,15 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "ScriptHuman - AI Content Humanization & Trust Verification",
   description: "Transform AI-generated content into authentic human writing. Verify content authenticity with forensic analysis and media detection.",
+  metadataBase: new URL('https://www.scripthuman.com'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+    },
+  },
+  // The App Router automatically generates /sitemap.xml when app/sitemap.ts is present,
+  // so explicitly defining it is optional, but we add it as requested by the user.
 };
 
 import AuthProvider from "@/components/AuthProvider";
