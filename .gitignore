@@ -20,6 +20,10 @@
 # production
 /build
 
+# seo / sitemap
+public/sitemap*.xml
+public/robots.txt
+
 # misc
 .DS_Store
 *.pem
