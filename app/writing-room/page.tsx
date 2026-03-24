@@ -434,10 +434,6 @@ export default function WritingRoom() {
                                             
                                             {grammarResult.correction && grammarResult.correction !== text && (
                                                 <div className="mt-4">
-                                                    <h4 className="font-bold text-gray-700 dark:text-gray-300 text-sm mb-2">Original Text:</h4>
-                                                    <div className="p-4 bg-gray-50 dark:bg-slate-900/50 rounded-xl border border-gray-100 dark:border-slate-700 text-gray-800 dark:text-gray-200 text-sm whitespace-pre-wrap line-through decoration-red-400">
-                                                        {text}
-                                                    </div>
                                                     <h4 className="font-bold text-gray-700 dark:text-gray-300 text-sm mb-2 mt-4">Suggested Fix:</h4>
                                                     <div className="p-4 bg-green-50 dark:bg-green-900/10 rounded-xl border border-green-100 dark:border-green-900/30 text-green-800 dark:text-green-300 text-sm whitespace-pre-wrap">
                                                         {grammarResult.correction}
