@@ -32,6 +32,8 @@ export default function WritingRoom() {
     const [heat, setHeat] = useState<HeatmapData[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
+    const [grammarResult, setGrammarResult] = useState<any>(null);
+    const [grammarError, setGrammarError] = useState<string | null>(null);
     const [showMoodSelector, setShowMoodSelector] = useState(false);
     const [activeTool, setActiveTool] = useState<ToolType>('persona');
     const [socialPlatform, setSocialPlatform] = useState<string>('linkedin');
@@ -101,6 +103,8 @@ export default function WritingRoom() {
 
         setText('');
         setHumanizedText('');
+        setGrammarResult(null);
+        setGrammarError(null);
         setStats(null);
         setPulse([]);
         setHeat([]);
@@ -126,6 +130,33 @@ export default function WritingRoom() {
 
         if (!trackUsage('writing-room', wordCount)) return;
         setShowMoodSelector(true);
+    };
+
+    const handleGrammarCheckClick = async () => {
+        if (!text) return;
+        setIsProcessing(true);
+        setGrammarResult(null);
+        setGrammarError(null);
+
+        try {
+            const response = await fetch('/api/grammar-check', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text })
+            });
+
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.error || 'Grammar fixing feature is currently unavailable. Please check grammar manually.');
+            }
+
+            setGrammarResult(data.suggestions);
+        } catch (error: any) {
+            setGrammarError(error.message);
+        } finally {
+            setIsProcessing(false);
+        }
     };
 
     const handleMoodSelect = async (selectedMood: string) => {
@@ -218,7 +249,8 @@ export default function WritingRoom() {
                         <span className="text-sm font-bold uppercase tracking-wide">
                             {activeTool === 'social' ? 'Social Media Humanizer' :
                                 activeTool === 'email' ? 'Humanized Email Writer' :
-                                    'Advanced AI Humanizer'}
+                                    activeTool === 'grammar' ? 'Grammar Correction Suggestions' :
+                                        'Advanced AI Humanizer'}
                         </span>
                     </div>
 
@@ -227,6 +259,8 @@ export default function WritingRoom() {
                             <>Viral <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">Social Vibe</span></>
                         ) : activeTool === 'email' ? (
                             <>Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">Email Flow</span></>
+                        ) : activeTool === 'grammar' ? (
+                            <>Grammar <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">Suggestions</span></>
                         ) : (
                             <>Restore the <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">Human Vibe</span></>
                         )}
@@ -235,7 +269,8 @@ export default function WritingRoom() {
                     <p className="text-xl text-gray-500 dark:text-white max-w-3xl mx-auto leading-relaxed font-[var(--font-metro)]">
                         {activeTool === 'social' ? "Craft engaging, human-sounding posts that connect with your audience." :
                             activeTool === 'email' ? "Write emails that sound professional yet personal, perfect for business communication." :
-                                "Bypass AI detection with our advanced re-writing engine. Polish your content to be indistinguishable from human writing."}
+                                activeTool === 'grammar' ? "Identify grammar issues in your humanized text and get suggestions on how to fix them manually." :
+                                    "Bypass AI detection with our advanced re-writing engine. Polish your content to be indistinguishable from human writing."}
                     </p>
                 </motion.div>
 
@@ -262,7 +297,7 @@ export default function WritingRoom() {
                                 value={text}
                                 onChange={(e) => setText(e.target.value)}
                                 onPaste={handlePaste}
-                                placeholder="Paste your AI draft here to detect Silicon Smog..."
+                                placeholder={activeTool === 'grammar' ? "Paste your humanized text here to get grammar suggestions..." : "Paste your AI draft here to detect Silicon Smog..."}
                                 className="w-full min-h-[600px] p-6 rounded-3xl resize-none focus:outline-none text-lg leading-relaxed text-gray-700 dark:text-white placeholder:text-gray-300 dark:placeholder:text-gray-500 bg-transparent font-[var(--font-metro)]"
                             />
 
@@ -272,11 +307,11 @@ export default function WritingRoom() {
                                     {text.split(/\s+/).filter(Boolean).length} words
                                 </div>
                                 <button
-                                    onClick={handleHumanizeClick}
+                                    onClick={activeTool === 'grammar' ? handleGrammarCheckClick : handleHumanizeClick}
                                     disabled={!text || isProcessing}
                                     className="px-6 py-3 rounded-full bg-gradient-to-r from-[#FF9A6C] to-[#FF6B4A] text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-orange-500/20 hover:scale-105 transition-transform disabled:opacity-50 disabled:scale-100"
                                 >
-                                    {isProcessing ? "Humanizing..." : "Humanize Now"}
+                                    {isProcessing ? (activeTool === 'grammar' ? "Checking..." : "Humanizing...") : (activeTool === 'grammar' ? "Get Grammar Suggestions" : "Humanize Now")}
                                     <Sparkles size={16} fill="currentColor" className="text-white/80" />
                                 </button>
                             </div>
@@ -370,8 +405,60 @@ export default function WritingRoom() {
                             </motion.div>
                         )}
 
+                        {/* Grammar Check Output */}
+                        {activeTool === 'grammar' && (grammarResult || grammarError) && (
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white font-display">
+                                    <PenTool size={18} className="text-orange-500" />
+                                    <span>Grammar Suggestions</span>
+                                </div>
+                                <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
+                                    {grammarError ? (
+                                        <div className="p-4 bg-red-50 border border-red-200 rounded-2xl flex items-start gap-3">
+                                            <AlertTriangle className="text-red-500 shrink-0 mt-0.5" size={20} />
+                                            <div className="text-sm text-red-900 font-[var(--font-metro)]">
+                                                {grammarError}
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-4">
+                                            {grammarResult.error ? (
+                                                <div className="p-4 bg-blue-50 border border-blue-200 rounded-2xl text-sm text-blue-900 font-[var(--font-metro)] whitespace-pre-wrap">
+                                                    {grammarResult.error}
+                                                </div>
+                                            ) : (
+                                                <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-sm text-emerald-900 font-[var(--font-metro)]">
+                                                    No grammar issues found!
+                                                </div>
+                                            )}
+                                            
+                                            {grammarResult.correction && grammarResult.correction !== text && (
+                                                <div className="mt-4">
+                                                    <h4 className="font-bold text-gray-700 dark:text-gray-300 text-sm mb-2">Original Text:</h4>
+                                                    <div className="p-4 bg-gray-50 dark:bg-slate-900/50 rounded-xl border border-gray-100 dark:border-slate-700 text-gray-800 dark:text-gray-200 text-sm whitespace-pre-wrap line-through decoration-red-400">
+                                                        {text}
+                                                    </div>
+                                                    <h4 className="font-bold text-gray-700 dark:text-gray-300 text-sm mb-2 mt-4">Suggested Fix:</h4>
+                                                    <div className="p-4 bg-green-50 dark:bg-green-900/10 rounded-xl border border-green-100 dark:border-green-900/30 text-green-800 dark:text-green-300 text-sm whitespace-pre-wrap">
+                                                        {grammarResult.correction}
+                                                    </div>
+                                                </div>
+                                            )}
+                                            
+                                            <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-3">
+                                                <AlertTriangle className="text-amber-500 shrink-0 mt-0.5" size={20} />
+                                                <p className="text-sm text-amber-900 font-[var(--font-metro)]">
+                                                    <strong>Please apply these fixes manually to your document.</strong> Automated grammar checkers can sometimes reintroduce robotic patterns that trigger AI detectors. By making these corrections yourself, you ensure your text retains its natural, human feel.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
                         {/* Humanized Output - Shows ABOVE heatmap */}
-                        {humanizedText && (
+                        {humanizedText && activeTool !== 'grammar' && (
                             <div className="space-y-4">
                                 {
                                     /* Subject Line UI Removed */
@@ -430,7 +517,7 @@ export default function WritingRoom() {
                         )}
 
                         {/* Heatmap Visualization - Only show if NO humanized result */}
-                        {text && !humanizedText && (
+                        {text && !humanizedText && activeTool !== 'grammar' && (
                             <div className="space-y-3">
                                 <div className="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white font-display">
                                     <Thermometer size={18} className="text-purple-500" />

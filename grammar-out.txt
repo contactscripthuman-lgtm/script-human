@@ -1,0 +1,9 @@
+Testing text: Plagrism Chcker analyzes whether any section of your text did not properly attribute authorship to content already published on the web or in books, research papers, academic papers, or news sorces.
+API Status: 200
+Response Keys: [ 'errors' ]
+Full Response: {
+  "errors": {
+    "correction": "Plagiarism Checker analyzes whether any section of your text did not properly attribute authorship to content already published on the web or in books, research papers, academic papers, or news sources.",
+    "error": "**Errors Explained:**\n1. \"Plagrism\" was misspelled; it should be \"Plagiarism.\"\n2. \"Chcker\" was misspelled; it should be \"Checker.\"\n3. \"sorces\" was misspelled; it should be \"sources.\""
+  }
+}

@@ -162,9 +162,6 @@ export async function POST(req: NextRequest) {
             humanized = emailParts.body;
        }
 
-        // STEP 6: Grammar Check & Fix via RapidAPI
-        humanized = await checkAndFixGrammar(humanized);
-
         return NextResponse.json({
             success: score >= 75 || iterations >= maxIterations,
             humanizedText: humanized,
@@ -580,54 +577,4 @@ function addSubtleImperfections(text: string): string {
     // Already handled in createExtremeSDSL
 
     return result;
-}
-
-/**
- * Grammar Check & Fix using RapidAPI grammer-checker
- * Calls the external API and returns the corrected text.
- * Falls back silently to the original text if the API call fails.
- */
-async function checkAndFixGrammar(text: string): Promise<string> {
-    try {
-        const response = await fetch('https://grammer-checker1.p.rapidapi.com/v1/grammer-checker', {
-            method: 'POST',
-            headers: {
-                'x-rapidapi-key': '0bc3489bedmshfd588ff5c37e824p195b21jsn9cb02f06aac0',
-                'x-rapidapi-host': 'grammer-checker1.p.rapidapi.com',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ text }),
-        });
-
-        if (!response.ok) {
-            console.warn(`⚠️ Grammar check API returned ${response.status} - using original text`);
-            return text;
-        }
-
-        const data = await response.json();
-
-        // Log response shape on first call to confirm field name
-        console.log('📝 Grammar API response keys:', Object.keys(data));
-
-        // Try common response field names
-        const corrected: string =
-            data.errors?.correction ||
-            data.corrected ||
-            data.correctedText ||
-            data.result ||
-            data.output ||
-            data.text ||
-            (typeof data === 'string' ? data : null);
-
-        if (corrected && typeof corrected === 'string' && corrected.trim().length > 0) {
-            console.log('✅ Grammar check applied successfully');
-            return corrected.trim();
-        }
-
-        console.warn('⚠️ Grammar check: unexpected response shape - using original text');
-        return text;
-    } catch (err) {
-        console.error('⚠️ Grammar check failed (network/parse error):', err);
-        return text; // Fallback: return original humanized text
-    }
 }

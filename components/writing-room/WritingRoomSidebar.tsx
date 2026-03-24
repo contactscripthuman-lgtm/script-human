@@ -1,9 +1,9 @@
 "use client";
 
-import { User, Mail, Share2, FileText } from "lucide-react";
+import { User, Mail, Share2, FileText, PenTool } from "lucide-react";
 import { motion } from "framer-motion";
 
-export type ToolType = 'persona' | 'email' | 'social';
+export type ToolType = 'persona' | 'email' | 'social' | 'grammar';
 
 interface WritingRoomSidebarProps {
     activeTool: ToolType;
@@ -42,6 +42,16 @@ export default function WritingRoomSidebar({ activeTool, onSelectTool, disabled 
             bgHover: 'group-hover:bg-orange-500',
             borderHover: 'hover:border-orange-500',
             description: "Professional emails with proper etiquette"
+        },
+        {
+            id: 'grammar' as ToolType,
+            label: 'Grammar Correction Suggestions',
+            icon: PenTool,
+            color: 'bg-orange-500',
+            textColor: 'text-orange-500',
+            bgHover: 'group-hover:bg-orange-500',
+            borderHover: 'hover:border-orange-500',
+            description: "Get grammar fixing suggestions for your humanized text"
         }
     ];
 
@@ -96,11 +106,13 @@ export default function WritingRoomSidebar({ activeTool, onSelectTool, disabled 
                     {activeTool === 'persona' && "Humanize Content Writer"}
                     {activeTool === 'email' && "Email Writer Mode"}
                     {activeTool === 'social' && "Social Media Mode"}
+                    {activeTool === 'grammar' && "Grammar Correction Suggestions"}
                 </h4>
                 <p className="text-xs text-orange-700/80 leading-relaxed font-[var(--font-metro)]">
                     {activeTool === 'persona' && "Our core algorithmic engine designed to humanize general content, essays, and articles while bypassing AI detection."}
                     {activeTool === 'email' && "Optimized for professional communication. Adds natural greetings, sign-offs, and polite hedging to ensure your emails sound genuinely human."}
                     {activeTool === 'social' && "Analysis for high-engagement platforms. Focuses on punchy sentence structures, emotional hooks, and authentic emoji usage."}
+                    {activeTool === 'grammar' && "Paste your humanized text here to get grammar correction suggestions. We recommend applying these fixes manually to retain the human feel."}
                 </p>
             </div>
         </div>
