@@ -611,6 +611,7 @@ async function checkAndFixGrammar(text: string): Promise<string> {
 
         // Try common response field names
         const corrected: string =
+            data.errors?.correction ||
             data.corrected ||
             data.correctedText ||
             data.result ||
