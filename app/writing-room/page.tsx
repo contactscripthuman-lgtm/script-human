@@ -287,8 +287,8 @@ export default function WritingRoom() {
                         </div>
                     </div>
 
-                    {/* CENTER EDITOR (6 cols) */}
-                    <div className="lg:col-span-6 space-y-6">
+                    {/* CENTER EDITOR */}
+                    <div className={`space-y-6 ${activeTool === 'persona' ? 'lg:col-span-6' : 'lg:col-span-9'}`}>
 
                         {/* Text Input Area */}
                         <div className="bg-white dark:bg-slate-800 rounded-3xl p-1 shadow-sm border border-gray-200 dark:border-slate-700 relative">
@@ -528,6 +528,7 @@ export default function WritingRoom() {
                     </div>
 
                     {/* RIGHT COLUMN - ANALYSIS (3 cols) */}
+                    {activeTool === 'persona' && (
                     <div className="lg:col-span-3">
                         <div className="sticky top-24 space-y-6">
 
@@ -620,6 +621,7 @@ export default function WritingRoom() {
 
                         </div>
                     </div>
+                    )}
 
                 </div>
             </div>

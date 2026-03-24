@@ -83,6 +83,9 @@ export default function HowToUsePage() {
                             </h3>
                             <ul className="space-y-4 text-indigo-900 dark:text-indigo-200 text-base list-disc list-inside marker:text-indigo-400">
                                 <li>
+                                    Once you generated humanizer content you can check grammar in <strong>Grammar Correction Suggestions</strong> tool. From there you can find grammatically corrected version but we recommend doing those manually. If you use the same fixed content, please verify with Trust Hub again. You can humanize your content until it gets 75% or above score. This means you get totally humanized content and your content will bypass AI detectors.
+                                </li>
+                                <li>
                                     <strong>Manual Proofreading:</strong> Recheck spellings and grammar manually after the text is humanized.
                                 </li>
                                 <li>
