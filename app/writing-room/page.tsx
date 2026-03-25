@@ -72,9 +72,19 @@ export default function WritingRoom() {
         return () => clearTimeout(handler);
     }, [text]);
 
-    // Auto-load content from home page redirect
+    const ignoreNextClear = useRef(false);
+
+    // Auto-load content from home page redirect or extension and set active tool
     useEffect(() => {
         if (typeof window !== 'undefined') {
+            const searchParams = new URLSearchParams(window.location.search);
+            const tool = searchParams.get('tool') as ToolType;
+            
+            if (tool && tool !== 'persona') {
+                ignoreNextClear.current = true;
+                setActiveTool(tool);
+            }
+
             const initialContent = localStorage.getItem("writingRoomInitialContent");
             if (initialContent) {
                 setText(initialContent);
@@ -98,6 +108,11 @@ export default function WritingRoom() {
         // Skip the first render to avoid clearing localStorage content
         if (isFirstRender.current) {
             isFirstRender.current = false;
+            return;
+        }
+
+        if (ignoreNextClear.current) {
+            ignoreNextClear.current = false;
             return;
         }
 

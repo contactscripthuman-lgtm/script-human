@@ -9,8 +9,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'ScriptHuman | Digital Toolset',
-  description: 'Advanced content optimization with an antigravity experience.',
+  title: 'ScriptHuman | #1 Advanced AI Content Humanizer Tool - For Free',
+  description: 'ScriptHuman uses advanced algorithms to analyze and humanize AI-generated content, making it indistinguishable from human writing while maintaining authenticity. The #1 Advanced AI Content Humanizer Tool for free.',
   metadataBase: new URL('https://www.scripthuman.com'),
   alternates: {
     canonical: '/',
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'ScriptHuman',
-    description: 'Optimize your digital presence.',
+    title: 'ScriptHuman | #1 Advanced AI Content Humanizer Tool - For Free',
+    description: 'ScriptHuman uses advanced algorithms to analyze and humanize AI-generated content, making it indistinguishable from human writing while maintaining authenticity.',
     url: 'https://www.scripthuman.com',
     siteName: 'ScriptHuman',
     images: [{ url: '/og-root.png', width: 1200, height: 630 }],
