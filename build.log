@@ -7,18 +7,81 @@
 
 ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
   Creating an optimized production build ...
-Γ£ô Compiled successfully in 2.3s
+Γ£ô Compiled successfully in 3.3s
   Running TypeScript ...
   Collecting page data using 23 workers ...
 ΓÜá Using edge runtime on a page currently disables static generation for that page
-  Generating static pages using 23 workers (0/41) ...
-  Generating static pages using 23 workers (10/41) 
-Error occurred prerendering page "/". Read more: https://nextjs.org/docs/messages/prerender-error
-Error: Attempted to call createMotionComponent() from the server but createMotionComponent is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.
-    at <unknown> (D:\Script Human Web Tool\.next\server\chunks\ssr\_85b848eb._.js:1:9246)
-    at Object.get (D:\Script Human Web Tool\.next\server\chunks\ssr\_85b848eb._.js:1:113273)
-    at fn (D:\Script Human Web Tool\.next\server\chunks\ssr\_85b848eb._.js:1:122618) {
-  digest: '489151887'
-}
-Export encountered an error on /page: /, exiting the build.
-Γ¿» Next.js build worker exited with code: 1 and signal: null
+  Generating static pages using 23 workers (0/63) ...
+  Generating static pages using 23 workers (15/63) 
+  Generating static pages using 23 workers (31/63) 
+  Generating static pages using 23 workers (47/63) 
+Γ£ô Generating static pages using 23 workers (63/63) in 569.6ms
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ Γùï /about
+Γö£ ╞Æ /api/analyze
+Γö£ ╞Æ /api/content-writer
+Γö£ ╞Æ /api/debug-env
+Γö£ ╞Æ /api/email-writer
+Γö£ ╞Æ /api/enterprise/sanitize
+Γö£ ╞Æ /api/grammar-check
+Γö£ ╞Æ /api/hallucination
+Γö£ ╞Æ /api/humanize-iterative
+Γö£ ╞Æ /api/keys
+Γö£ ╞Æ /api/paraphrase
+Γö£ ╞Æ /api/sentiment
+Γö£ ╞Æ /api/social-media-pro
+Γö£ ╞Æ /api/stripe/checkout
+Γö£ ╞Æ /api/stripe/create-portal-session
+Γö£ ╞Æ /api/stripe/invoices
+Γö£ ╞Æ /api/stripe/sync
+Γö£ ╞Æ /api/stripe/webhook
+Γö£ ╞Æ /api/trust-hub/analyze
+Γö£ ╞Æ /api/trust-hub/analyze-media
+Γö£ ╞Æ /api/trust-hub/certify
+Γö£ ╞Æ /api/trust-hub/verify
+Γö£ ╞Æ /auth/callback
+Γö£ Γùï /blog
+Γö£ ΓùÅ /blog/[slug]
+Γöé Γö£ /blog/how-to-bypass-ai-detection-2026
+Γöé Γö£ /blog/seo-rankings-ai-content-google-update
+Γöé Γö£ /blog/ethical-use-of-ai-writing-tools
+Γöé Γöö [+9 more paths]
+Γö£ Γùï /compare
+Γö£ Γùï /contact
+Γö£ Γùï /dashboard
+Γö£ Γùï /dashboard/account
+Γö£ Γùï /dashboard/settings
+Γö£ Γùï /dashboard/settings/api-keys
+Γö£ Γùï /documentation
+Γö£ Γùï /enterprise
+Γö£ Γùï /enterprise/api-dashboard
+Γö£ Γùï /enterprise/brand-guardrails
+Γö£ Γùï /enterprise/voice-clone
+Γö£ Γùï /how-to-use
+Γö£ Γùï /icon.png
+Γö£ Γùï /login
+Γö£ Γùï /payment
+Γö£ Γùï /privacy
+Γö£ Γùï /robots.txt
+Γö£ Γùï /signup
+Γö£ Γùï /sitemap.xml
+Γö£ Γùï /style-studio
+Γö£ Γùï /success
+Γö£ Γùï /terms
+Γö£ Γùï /trust-hub
+Γö£ Γùï /verify
+Γö£ ╞Æ /verify/[id]
+Γö£ ╞Æ /verify/[id]/seal
+Γöö Γùï /writing-room
+
+
+╞Æ Proxy (Middleware)
+
+Γùï  (Static)   prerendered as static content
+ΓùÅ  (SSG)      prerendered as static HTML (uses generateStaticParams)
+╞Æ  (Dynamic)  server-rendered on demand
+

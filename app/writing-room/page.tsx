@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, Copy, Check, RotateCcw, Wand2, AlertTriangle, ChevronDown, CheckCircle2, ChevronRight, X, Sparkles, BrainCircuit, Ghost, Volume2, Bot, Thermometer, Activity, HelpCircle, Briefcase, Smile, Users, GraduationCap, BookOpen, PenTool, Palette, Building2, ShieldCheck, Mail, Share2, User } from "lucide-react";
+import { ArrowRight, Copy, Check, RotateCcw, Wand2, AlertTriangle, ChevronDown, CheckCircle2, ChevronRight, X, Sparkles, BrainCircuit, Ghost, Volume2, Bot, Thermometer, Activity, HelpCircle, Briefcase, Smile, Users, GraduationCap, BookOpen, PenTool, Palette, Building2, ShieldCheck, Mail, Share2, User, Lock, FileText, RefreshCw } from "lucide-react";
 import ToolNavbar from "@/components/ToolNavbar";
 import WritingRoomWhyUs from "@/components/writing-room/WhyChooseUs";
 import FAQ from "@/components/FAQ";
@@ -421,6 +421,43 @@ export default function WritingRoom() {
 
                     {/* CENTER EDITOR */}
                     <div className={`space-y-6 ${activeTool === 'persona' ? 'lg:col-span-6' : 'lg:col-span-9'}`}>
+
+                        {/* Mobile Tool Selector */}
+                        <div className="block lg:hidden bg-white dark:bg-slate-800 rounded-3xl p-4 border border-gray-200 dark:border-slate-700 shadow-sm overflow-x-auto whitespace-nowrap hide-scrollbar">
+                           <div className="flex gap-3">
+                                {[
+                                    { id: 'persona', label: 'Advanced Humanizer', icon: FileText, pro: false },
+                                    { id: 'social', label: 'Social Media Tone', icon: Share2, pro: false },
+                                    { id: 'email', label: 'Email Writer', icon: Mail, pro: true },
+                                    { id: 'grammar', label: 'Grammar Correction', icon: PenTool, pro: false },
+                                    { id: 'paraphrase', label: 'Paraphrasing Tool', icon: RefreshCw, pro: true },
+                                    { id: 'hallucination', label: 'Hallucination Detector', icon: Activity, pro: true },
+                                    { id: 'sentiment', label: 'Sentiment Analyze', icon: Smile, pro: true },
+                                    { id: 'content', label: 'Content Writer', icon: BookOpen, pro: true },
+                                ].map((tool) => (
+                                    <button
+                                        key={tool.id}
+                                        onClick={() => {
+                                            if (tool.pro && !hasProAccess) {
+                                                setUpgradeMessage("This advanced tool is only available on the Pro plan.");
+                                                setShowUpgradeModal(true);
+                                            } else {
+                                                setActiveTool(tool.id as any);
+                                            }
+                                        }}
+                                        className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl border-2 transition-all font-bold text-sm ${
+                                            activeTool === tool.id
+                                                ? 'border-orange-500 bg-orange-50 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400'
+                                                : 'border-gray-100 dark:border-slate-700 bg-gray-50 dark:bg-slate-900 text-gray-600 dark:text-gray-300'
+                                        }`}
+                                    >
+                                        <tool.icon size={16} />
+                                        <span>{tool.label}</span>
+                                        {tool.pro && !hasProAccess && <Lock size={12} className="text-orange-500 ml-1" />}
+                                    </button>
+                                ))}
+                           </div>
+                        </div>
 
                         {/* Text Input Area */}
                         <div className="bg-white dark:bg-slate-800 rounded-3xl p-1 shadow-sm border border-gray-200 dark:border-slate-700 relative">
