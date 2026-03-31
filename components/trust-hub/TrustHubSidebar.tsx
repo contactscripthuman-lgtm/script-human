@@ -1,6 +1,6 @@
 "use client";
 
-import { FileText, Scan } from "lucide-react";
+import { FileText, Scan, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 
 export type TrustHubTool = 'content' | 'media';
@@ -52,13 +52,17 @@ export default function TrustHubSidebar({ activeTool, onSelectTool, disabled, is
                             <button
                                 key={tool.id}
                                 onClick={() => {
-                                    onSelectTool(tool.id);
+                                    if (tool.locked) {
+                                        onLockedClick();
+                                    } else {
+                                        onSelectTool(tool.id);
+                                    }
                                 }}
-                                disabled={disabled}
+                                disabled={disabled && !tool.locked}
                                 className={`w-full text-left p-3 rounded-xl transition-all duration-200 border-2 group relative overflow-hidden ${isActive
                                     ? `border-${tool.color.replace('bg-', '')} bg-gray-50`
                                     : "border-transparent hover:bg-gray-50 bg-white"
-                                    } ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                                    } ${(disabled && !tool.locked) ? "opacity-50 cursor-not-allowed" : ""}`}
                             >
                                 <div className="flex items-center gap-3 relative z-10 w-full">
                                     <div className={`p-2 rounded-lg transition-colors ${isActive
@@ -74,6 +78,7 @@ export default function TrustHubSidebar({ activeTool, onSelectTool, disabled, is
                                             {tool.beta && (
                                                 <span className="text-[10px] bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded-md font-extrabold tracking-wider">BETA</span>
                                             )}
+                                            {tool.locked && <Lock size={14} className="text-gray-400" />}
                                         </div>
                                     </div>
                                 </div>

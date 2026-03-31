@@ -38,6 +38,10 @@ export default function WritingRoom() {
     const [activeTool, setActiveTool] = useState<ToolType>('persona');
     const [socialPlatform, setSocialPlatform] = useState<string>('linkedin');
     const [showQuickTip, setShowQuickTip] = useState(false);
+    
+    // Additional states for new tools
+    const [extraInputs, setExtraInputs] = useState<Record<string, string>>({});
+    const [toolResult, setToolResult] = useState<any>(null);
 
     const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
         const pastedText = e.clipboardData.getData('text');
@@ -126,6 +130,8 @@ export default function WritingRoom() {
         setIsProcessing(false);
         setIsCopied(false);
         setShowMoodSelector(false);
+        setExtraInputs({});
+        setToolResult(null);
     }, [activeTool]);
 
     const { isPremium, hasProAccess, trackUsage, showUpgradeModal, setShowUpgradeModal, upgradeMessage, setUpgradeMessage } = useFreeTier();
@@ -181,12 +187,37 @@ export default function WritingRoom() {
             return;
         }
 
-        console.log('🔬 ITERATIVE HUMANIZATION STARTED');
+        console.log('🔬 GENERATION STARTED');
         console.log('Mood selected:', selectedMood);
 
         setIsProcessing(true);
 
         try {
+            if (activeTool === 'social' && hasProAccess) {
+                // Call social-media-pro RapidAPI for Pro Users
+                const response = await fetch('/api/social-media-pro', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        topic: text,
+                        platform: socialPlatform,
+                        tone: selectedMood
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.error || 'Pro Social Media generation failed');
+                }
+
+                const data = await response.json();
+                setHumanizedText(data.post || data.result || JSON.stringify(data));
+                
+                console.log(`✅ Pro Social Media generation complete!`);
+                return;
+            }
+
+            // Existing iterative humanization API
             // Artificial delay for UX (5 seconds)
             await new Promise(resolve => setTimeout(resolve, 5000));
 
@@ -224,6 +255,87 @@ export default function WritingRoom() {
             console.error('Humanization error:', error);
             const errorMessage = error instanceof Error ? error.message : 'Something went wrong during humanization.';
             alert(`Error: ${errorMessage}`);
+        } finally {
+            setIsProcessing(false);
+        }
+    };
+
+    const handleProToolExecute = async () => {
+        if (!hasProAccess) {
+            setUpgradeMessage("This advanced tool is only available on the Pro plan.");
+            setShowUpgradeModal(true);
+            return;
+        }
+
+        setIsProcessing(true);
+        setToolResult(null);
+        setHumanizedText("");
+        setGrammarError(null);
+
+        try {
+            let endpoint = '';
+            let payload: any = {};
+
+            switch (activeTool) {
+                case 'paraphrase':
+                    endpoint = '/api/paraphrase';
+                    payload = { text };
+                    if (!text) throw new Error("Please enter text to paraphrase.");
+                    break;
+                case 'hallucination':
+                    endpoint = '/api/hallucination';
+                    payload = { text, context: extraInputs.context || "", question: extraInputs.question || "" };
+                    if (!text || !payload.context || !payload.question) {
+                        throw new Error("Please fill in all fields (Generated Answer, Context, Question).");
+                    }
+                    break;
+                case 'sentiment':
+                    endpoint = '/api/sentiment';
+                    payload = { text };
+                    if (!text) throw new Error("Please enter text for sentiment analysis.");
+                    break;
+                case 'content':
+                    endpoint = '/api/content-writer';
+                    payload = { topic: text };
+                    if (!text) throw new Error("Please enter a topic.");
+                    break;
+                case 'email':
+                    endpoint = '/api/email-writer';
+                    payload = { 
+                        sender: extraInputs.sender || "", 
+                        receiver: extraInputs.receiver || "", 
+                        purpose: text 
+                    };
+                    if (!text || !payload.sender || !payload.receiver) {
+                        throw new Error("Please fill in all fields (Sender, Receiver, Purpose).");
+                    }
+                    break;
+                default:
+                    throw new Error("Invalid tool");
+            }
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.error || 'Feature is currently unavailable.');
+            }
+
+            if (activeTool === 'paraphrase') {
+                setHumanizedText(data.result || data.paraphrased_text || JSON.stringify(data));
+            } else if (activeTool === 'email' || activeTool === 'content') {
+                setHumanizedText(data.email || data.content || data.result || JSON.stringify(data));
+            } else {
+                setToolResult(data);
+            }
+
+        } catch (error: any) {
+            setGrammarError(error.message);
         } finally {
             setIsProcessing(false);
         }
@@ -298,6 +410,11 @@ export default function WritingRoom() {
                                 activeTool={activeTool}
                                 onSelectTool={setActiveTool}
                                 disabled={isProcessing}
+                                hasProAccess={hasProAccess}
+                                onLockedClick={() => {
+                                    setUpgradeMessage("This advanced tool is only available on the Pro plan.");
+                                    setShowUpgradeModal(true);
+                                }}
                             />
                         </div>
                     </div>
@@ -308,12 +425,68 @@ export default function WritingRoom() {
                         {/* Text Input Area */}
                         <div className="bg-white dark:bg-slate-800 rounded-3xl p-1 shadow-sm border border-gray-200 dark:border-slate-700 relative">
                             <QuickTip isVisible={showQuickTip} onClose={() => setShowQuickTip(false)} />
+                            
+                            {activeTool === 'hallucination' && (
+                                <div className="p-6 space-y-4 border-b border-gray-100 dark:border-slate-700">
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 font-display">Context / Source Text</label>
+                                        <textarea
+                                            value={extraInputs.context || ''}
+                                            onChange={(e) => setExtraInputs({...extraInputs, context: e.target.value})}
+                                            placeholder="Paste the source material or context here..."
+                                            className="w-full min-h-[150px] p-4 rounded-2xl resize-y border border-gray-200 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-gray-50 dark:bg-slate-900 font-[var(--font-metro)]"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 font-display">Question Asked</label>
+                                        <input
+                                            type="text"
+                                            value={extraInputs.question || ''}
+                                            onChange={(e) => setExtraInputs({...extraInputs, question: e.target.value})}
+                                            placeholder="What question was asked?"
+                                            className="w-full p-4 rounded-xl border border-gray-200 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-gray-50 dark:bg-slate-900 font-[var(--font-metro)]"
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+                            {activeTool === 'email' && (
+                                <div className="p-6 space-y-4 border-b border-gray-100 dark:border-slate-700 flex gap-4">
+                                    <div className="flex-1">
+                                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 font-display">Sender Name</label>
+                                        <input
+                                            type="text"
+                                            value={extraInputs.sender || ''}
+                                            onChange={(e) => setExtraInputs({...extraInputs, sender: e.target.value})}
+                                            placeholder="Your name"
+                                            className="w-full p-4 rounded-xl border border-gray-200 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm bg-gray-50 dark:bg-slate-900 font-[var(--font-metro)]"
+                                        />
+                                    </div>
+                                    <div className="flex-1">
+                                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 font-display">Receiver Name</label>
+                                        <input
+                                            type="text"
+                                            value={extraInputs.receiver || ''}
+                                            onChange={(e) => setExtraInputs({...extraInputs, receiver: e.target.value})}
+                                            placeholder="Recipient's name"
+                                            className="w-full p-4 rounded-xl border border-gray-200 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm bg-gray-50 dark:bg-slate-900 font-[var(--font-metro)]"
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
                             <textarea
                                 value={text}
                                 onChange={(e) => setText(e.target.value)}
                                 onPaste={handlePaste}
-                                placeholder={activeTool === 'grammar' ? "Paste your humanized text here to get grammar suggestions..." : "Paste your AI draft here to detect Silicon Smog..."}
-                                className="w-full min-h-[600px] p-6 rounded-3xl resize-none focus:outline-none text-lg leading-relaxed text-gray-700 dark:text-white placeholder:text-gray-300 dark:placeholder:text-gray-500 bg-transparent font-[var(--font-metro)]"
+                                placeholder={
+                                    activeTool === 'grammar' ? "Paste your humanized text here to get grammar suggestions..." : 
+                                    activeTool === 'hallucination' ? "Paste the AI's generated answer here to check for hallucinations..." :
+                                    activeTool === 'email' ? "What is the purpose of this email? (e.g., 'Ask for a meeting next week to discuss the project')" :
+                                    activeTool === 'content' ? "Enter a topic to generate content about..." :
+                                    "Paste your AI draft here..."
+                                }
+                                className={`w-full ${['hallucination', 'email'].includes(activeTool) ? 'min-h-[300px]' : 'min-h-[600px]'} p-6 rounded-3xl resize-none focus:outline-none text-lg leading-relaxed text-gray-700 dark:text-white placeholder:text-gray-300 dark:placeholder:text-gray-500 bg-transparent font-[var(--font-metro)]`}
                             />
 
                             {/* Toolbar */}
@@ -322,11 +495,29 @@ export default function WritingRoom() {
                                     {text.split(/\s+/).filter(Boolean).length} words
                                 </div>
                                 <button
-                                    onClick={activeTool === 'grammar' ? handleGrammarCheckClick : handleHumanizeClick}
+                                    onClick={
+                                        activeTool === 'grammar' ? handleGrammarCheckClick : 
+                                        ['paraphrase', 'hallucination', 'sentiment', 'content', 'email'].includes(activeTool) ? handleProToolExecute :
+                                        handleHumanizeClick
+                                    }
                                     disabled={!text || isProcessing}
-                                    className="px-6 py-3 rounded-full bg-gradient-to-r from-[#FF9A6C] to-[#FF6B4A] text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-orange-500/20 hover:scale-105 transition-transform disabled:opacity-50 disabled:scale-100"
+                                    className={`px-6 py-3 rounded-full text-white font-bold text-sm flex items-center gap-2 shadow-lg transition-transform disabled:opacity-50 disabled:scale-100 ${
+                                        activeTool === 'hallucination' ? 'bg-gradient-to-r from-emerald-500 to-teal-500 shadow-emerald-500/20 hover:scale-105' :
+                                        activeTool === 'sentiment' ? 'bg-gradient-to-r from-purple-500 to-pink-500 shadow-purple-500/20 hover:scale-105' :
+                                        activeTool === 'content' ? 'bg-gradient-to-r from-indigo-500 to-blue-500 shadow-indigo-500/20 hover:scale-105' :
+                                        activeTool === 'paraphrase' ? 'bg-gradient-to-r from-blue-500 to-cyan-500 shadow-blue-500/20 hover:scale-105' :
+                                        activeTool === 'email' ? 'bg-gradient-to-r from-purple-500 to-violet-500 shadow-purple-500/20 hover:scale-105' :
+                                        'bg-gradient-to-r from-[#FF9A6C] to-[#FF6B4A] shadow-orange-500/20 hover:scale-105'
+                                    }`}
                                 >
-                                    {isProcessing ? (activeTool === 'grammar' ? "Checking..." : "Humanizing...") : (activeTool === 'grammar' ? "Get Grammar Suggestions" : "Humanize Now")}
+                                    {isProcessing ? "Processing..." : 
+                                     activeTool === 'grammar' ? "Get Grammar Suggestions" : 
+                                     activeTool === 'hallucination' ? "Scan for Hallucinations" :
+                                     activeTool === 'sentiment' ? "Analyze Sentiment" :
+                                     activeTool === 'email' ? "Write Email" :
+                                     activeTool === 'content' ? "Generate Content" :
+                                     activeTool === 'paraphrase' ? "Paraphrase" :
+                                     "Humanize Now"}
                                     <Sparkles size={16} fill="currentColor" className="text-white/80" />
                                 </button>
                             </div>
@@ -468,6 +659,24 @@ export default function WritingRoom() {
                             </div>
                         )}
 
+                        {/* JSON / Data Results for Pro Tools */}
+                        {toolResult && !humanizedText && (
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white font-display">
+                                    <Activity size={18} className={
+                                        activeTool === 'hallucination' ? "text-emerald-500" :
+                                        activeTool === 'sentiment' ? "text-purple-500" : 'text-blue-500'
+                                    } />
+                                    <span>{activeTool === 'hallucination' ? 'Hallucination Analysis' : 'Analysis Result'}</span>
+                                </div>
+                                <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm overflow-x-auto">
+                                    <pre className="text-sm text-gray-700 dark:text-gray-300 font-mono whitespace-pre-wrap break-words">
+                                        {typeof toolResult === 'string' ? toolResult : JSON.stringify(toolResult, null, 2)}
+                                    </pre>
+                                </div>
+                            </div>
+                        )}
+
                         {/* Humanized Output - Shows ABOVE heatmap */}
                         {humanizedText && activeTool !== 'grammar' && (
                             <div className="space-y-4">
@@ -479,7 +688,12 @@ export default function WritingRoom() {
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white font-display">
                                             <Sparkles size={18} className="text-orange-500" />
-                                            <span>{activeTool === 'email' ? 'Email Body' : 'Humanized Result'}</span>
+                                            <span>
+                                                {activeTool === 'email' ? 'Email Output' : 
+                                                 activeTool === 'paraphrase' ? 'Paraphrased Text' : 
+                                                 activeTool === 'content' ? 'Generated Content' : 
+                                                 'Humanized Result'}
+                                            </span>
                                         </div>
                                         <button
                                             onClick={handleCopy}
@@ -527,8 +741,8 @@ export default function WritingRoom() {
                             </div>
                         )}
 
-                        {/* Heatmap Visualization - Only show if NO humanized result */}
-                        {text && !humanizedText && activeTool !== 'grammar' && (
+                        {/* Heatmap Visualization - Only show if NO humanized result and NOT grammar/sentiment/hallucination */}
+                        {text && !humanizedText && !toolResult && !['grammar', 'sentiment', 'hallucination', 'paraphrase', 'content', 'email'].includes(activeTool) && (
                             <div className="space-y-3">
                                 <div className="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white font-display">
                                     <Thermometer size={18} className="text-purple-500" />
